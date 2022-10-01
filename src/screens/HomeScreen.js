@@ -17,22 +17,18 @@ import { images } from '../assets';
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+
 const HomeScreen = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
-
   const dispatch = useDispatch();
 
   const [popup, setPopup] = useState(false);
 
-  const onClickTurnButton = () => {
-    navigation.navigate('BUY');
-  };
-
-  const onClickStartButton = () => {
-    if (points.value <= 0){
-      Alert.alert('Please buy more turn!');
+  const onClickStartButton = (item) => {
+    if (points.value === 0) {
+      Alert.alert('Please buy more turn');
       return false;
     }
     dispatch(decrement());
@@ -40,13 +36,17 @@ const HomeScreen = () => {
   };
 
 
+  const onClickTurnButton = () => {
+    navigation.navigate('BUY');
+  };
+
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.btnbuy} style={appStyle.buyImage} />
+            <Image source={images.buttonbuy} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -54,16 +54,17 @@ const HomeScreen = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.btnplay} style={appStyle.itemView} />
-      </TouchableOpacity>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={onClickStartButton}>
+          <Image source={images.buttonstart} style={appStyle.startBtn} />
+        </TouchableOpacity>
+      </View>
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
           <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.btnexit} style={appStyle.okBtn} />
+            <Image source={images.buttonok} style={appStyle.okBtn} />
           </TouchableOpacity>
-
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -80,21 +81,24 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
-  popupImage: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.3,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  labelText: {
-    fontSize:30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
-  },
   closeView: {
     position: 'absolute',
-    top: '5%',
-    right: '0%',
+    top: '3%',
+    right: '5%',
+  },
+  appBar: {
+    flex: 0.1,
+    width: '100%',
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  popupImage: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.4,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   popupView: {
     width: windowWidth,
@@ -108,63 +112,59 @@ export const appStyle = StyleSheet.create({
     right: '0%',
     bottom: '0%',
   },
-  okBtn: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
-  },
-  appBar: {
-    height: windowHeight * 0.1,
-    paddingHorizontal: 20,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  turnView: {
-    flexDirection: 'row',
-    width: windowWidth * 0.15,
-    height: '100%',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  turnText: {
-    fontSize: windowWidth < 600 ? 30 : 50,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
-  },
   buyImage: {
     width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
-  brokenImage: {
-    width: windowWidth,
-    height: windowHeight * 0.5,
-    resizeMode: 'contain',
-  },
-  itemView: {
-    width: windowWidth * 0.4,
+  okBtn: {
+    width: windowWidth * 0.2,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
-  text: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
-  },
   bottomView: {
-    flex: 0.3,
+    flex: 0.2,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
+  centerView: {
+    flex: 0.4,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  turnView: {
+    width: windowWidth * 0.15,
+    marginRight: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  bullImage: {
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
+  },
+  startBtn: {
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+  },
+  scoreStyle: {
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
+  turnText: {
+    fontSize: 30,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  labelText: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
 

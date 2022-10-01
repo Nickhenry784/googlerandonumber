@@ -1,4 +1,4 @@
-package com.cloydstokes.numberrivercalculator;
+package com.amandavonrueden.elementalmagic;
 
 import com.facebook.react.ReactActivity;
 

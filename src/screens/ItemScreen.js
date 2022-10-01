@@ -3,101 +3,72 @@
 import {
   StyleSheet,
   View, Dimensions,
+  ScrollView,
   Image,
   Alert,
   ImageBackground,
   TouchableOpacity,
-  Text,
-  FlatList} from 'react-native';
+  Animated,
+  SafeAreaView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import { images } from '../assets';
-var converter = require('number-to-words');
+import { useRef } from 'react';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+const dataBg = [
+  {id: 1, bg: images.ball},
+  {id: 2, bg: images.fireball},
+  {id: 3, bg: images.grassball},
+  {id: 4, bg: images.iceball},
+  {id: 5, bg: images.suprememagicball},
+  {id: 6, bg: images.thunderball},
+  {id: 7, bg: images.windball},
+];
 
 const ItemScreen = ({navigation, route}) => {
 
-  const [text, setText] = useState([randomIntFromInterval(0,100),randomIntFromInterval(0,300)]);
-  const [result, setResult] = useState(randomPost([text[0] + text[1],randomIntFromInterval(0,600), randomIntFromInterval(0,600),randomIntFromInterval(0,600)]));
-  const [score, setScore] = useState(0);
-  const [time,setTime] = useState(10);
-  const [answer, setAnswer] = useState(0);
-  const [popup, setPopup] = useState(false);
+  const [index, setIndex] = useState(Math.floor(Math.random() * 6));
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [click, setClick] = useState(false);
 
-  useEffect(() => {
-    const timeOut = setTimeout(() => {
-      if (time > 0){
-        setTime(time - 1);
-      }
-      if (time === 0){
-        if (answer === text[0] + text[1]){
-          setScore(score + 10);
-          setText([randomIntFromInterval(0,100),randomIntFromInterval(0,300)]);
-          setTime(10);
-          setAnswer(0);
-        } else {
-          navigation.goBack();
-        }
-      }
-    },1000);
-    return () => {
-      clearTimeout(timeOut);
-    };
-  },[time]);
+  const fadeIn = () => {
+    setClick(true);
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+  };
 
-  useEffect(() => {
-    setResult(randomPost([text[0] + text[1],randomIntFromInterval(0,600), randomIntFromInterval(0,600),randomIntFromInterval(0,600)]));
-  },[text]);
-
-  const handleClickCheckBtn = (val) => {
-    setAnswer(val);
-    setTime(1);
+  const onClickAgainBtn = () => {
+    setClick(false);
+    setIndex(Math.floor(Math.random() * 6));
+    fadeAnim.setValue(0);
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
-      <View style={appStyle.closeView}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.btnback} style={appStyle.btnClose} />
-        </TouchableOpacity>
-        <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
-      </View>
-      <Text style={appStyle.labelText}>{`${time}s`}</Text>
-      <ImageBackground style={appStyle.centerView} source={images.textbox}>
-        <Text style={appStyle.labelText}>{`${text[0]} + ${text[1]} = ?`}</Text>
-      </ImageBackground>
-      <Text style={appStyle.label}>Your answer</Text>
-      <View style={appStyle.bottomView}>
-        <FlatList
-          data={result}
-          scrollEnabled
-          horizontal={true}
-          renderItem={({item}) => (
-            <TouchableOpacity onPress={() => handleClickCheckBtn(item)}>
-              <ImageBackground source={images.stone1} style={appStyle.btn}>
-                <Text style={appStyle.labelAnswer}>{item}</Text>
-              </ImageBackground>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
+
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+      <SafeAreaView style={appStyle.homeView}>
+        <View style={appStyle.closeview}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={images.buttonback} style={appStyle.btnReturn} />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={appStyle.centerView} delayLongPress={5000} onLongPress={() => fadeIn()}/>
+        {click && <View style={appStyle.ballView}>
+          <Animated.Image source={dataBg[index].bg} style={[appStyle.btn,{ opacity: fadeAnim}]} />
+          <TouchableOpacity onPress={() => onClickAgainBtn()}>
+            <Image source={images.again} style={appStyle.btnReturn2} />
+          </TouchableOpacity>
+        </View>}
+      </SafeAreaView>
     </ImageBackground>
   );
 };
-
-export const randomPost = (list) => {
-  for (let index = 0; index < list.length; index++) {
-    const element = list[index];
-    list.splice(index,1);
-    list.splice(randomIntFromInterval(0,3),0,element);
-  }
-  return list;
-};
-
-export const randomIntFromInterval = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -105,112 +76,41 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
-  okBtn: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.1,
+  closeview: {
+    position: 'absolute',
+    top: '3%',
+    left: '3%',
+  },
+  btn: {
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.6,
     resizeMode: 'contain',
   },
-  popupBottomView: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  popupView: {
-    width: windowWidth,
-    height: windowHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(1, 1, 1, 0.7)',
-    position: 'absolute',
-    top: '0%',
-    left: '0%',
-    right: '0%',
-    bottom: '0%',
-  },
-  popupImage: {
-    width: windowWidth * 0.9,
-    height: windowHeight * 0.4,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  input: {
-    height: 60,
-    backgroundColor: 'white',
-    width: windowWidth * 0.7,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    fontSize: 30,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
-  },
-  closeView: {
-    width: windowWidth,
-    height: windowHeight * 0.1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-  },
-  centerView: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-  },
-  labelText: {
-    fontSize: windowWidth < 600 ? 30 : 50,
-    marginVertical: 50,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
-  },
-  label: {
-    fontSize: windowWidth < 600 ? 30 : 50,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
-    marginVertical: 20,
-  },
-  scoreText1: {
-    fontSize: 20,
-    fontFamily: 'chela-one.regular',
-    color: 'white',
-    position: 'absolute',
-    top:'40%',
-  },
-  scoreText: {
-    fontSize: windowWidth < 600 ? 30 : 50,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
-  },
-  btnClose: {
+  btnReturn: {
     width: windowWidth * 0.1,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
-  btn: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.15,
-    marginHorizontal: 10,
+  btnReturn2: {
+    width: windowWidth * 0.4,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 30,
   },
-  labelAnswer: {
-    fontSize: windowWidth < 600 ? 30 : 50,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
-  },
-  bottomView: {
+  centerView: {
     width: windowWidth,
-    height: windowHeight * 0.4,
+    height: windowHeight * 0.8,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  ballView: {
+    position: 'absolute',
+    top: '30%',
+    alignItems: 'center',
   },
 });
 
