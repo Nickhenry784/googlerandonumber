@@ -22,9 +22,9 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
-  const [popup, setPopup] = useState(false);
-
   const dispatch = useDispatch();
+
+  const [popup, setPopup] = useState(false);
 
   const onClickTurnButton = () => {
     navigation.navigate('BUY');
@@ -42,7 +42,7 @@ const HomeScreen = () => {
 
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -54,18 +54,16 @@ const HomeScreen = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <Image source={images.text} style={appStyle.brokenImage} />
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnplay} style={appStyle.itemView} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => onClickStartButton()}>
+        <Image source={images.btnplay} style={appStyle.itemView} />
+      </TouchableOpacity>
       {popup && (
       <View style={appStyle.popupView}>
         <ImageBackground style={appStyle.popupImage} source={images.board}>
           <TouchableOpacity onPress={() => setPopup(false)}>
             <Image source={images.btnexit} style={appStyle.okBtn} />
           </TouchableOpacity>
+
         </ImageBackground>
       </View>)}
     </ImageBackground>
@@ -84,7 +82,7 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.7,
-    height: windowHeight * 0.15,
+    height: windowHeight * 0.3,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -116,7 +114,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -131,9 +129,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: 30,
-    fontFamily: 'MontserratAlternates-Black',
-    color: 'white',
+    fontSize: windowWidth < 600 ? 30 : 50,
+    fontFamily: 'chela-one.regular',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -141,8 +139,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.8,
-    height: windowWidth * 0.4,
+    width: windowWidth,
+    height: windowHeight * 0.5,
     resizeMode: 'contain',
   },
   itemView: {

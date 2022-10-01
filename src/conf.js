@@ -1,35 +1,35 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.selectnum_1',
+    sku: 'com.ercalculator_1',
+    value: 10,
+  },
+  {
+    sku: 'com.ercalculator_2',
+    value: 50,
+  },
+  {
+    sku: 'com.ercalculator_3',
     value: 100,
   },
   {
-    sku: 'com.selectnum_2',
+    sku: 'com.ercalculator_4',
     value: 200,
   },
   {
-    sku: 'com.selectnum_3',
-    value: 300,
-  },
-  {
-    sku: 'com.selectnum_4',
+    sku: 'com.ercalculator_5',
     value: 400,
   },
   {
-    sku: 'com.selectnum_5',
-    value: 500,
-  },
-  {
-    sku: 'com.selectnum_6',
+    sku: 'com.ercalculator_6',
     value: 600,
   },
   {
-    sku: 'com.selectnum_7',
-    value: 700,
+    sku: 'com.ercalculator_7',
+    value: 800,
   },
   {
-    sku: 'com.selectnum_8',
-    value: 800,
+    sku: 'com.ercalculator_8',
+    value: 1000,
   },
 ];

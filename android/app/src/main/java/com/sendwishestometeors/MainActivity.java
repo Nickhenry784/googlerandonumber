@@ -1,4 +1,4 @@
-package com.alexandredeckow.selectednumber;
+package com.cloydstokes.numberrivercalculator;
 
 import com.facebook.react.ReactActivity;
 
