@@ -3,18 +3,16 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Text,
-  Dimensions,
+  Text, Dimensions,
   ImageBackground,
   Image,
   FlatList,
-  Alert,
-} from 'react-native';
+  Alert  } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {images} from '../assets';
+import { images } from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -33,13 +31,15 @@ const HomeScreen = () => {
   };
 
   const onClickStartButton = () => {
-    if (points.value <= 0) {
+    if (points.value <= 0){
       Alert.alert('Please buy more turn!');
       return false;
     }
     dispatch(decrement());
     navigation.navigate('Item');
   };
+
+
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg}>
@@ -54,24 +54,24 @@ const HomeScreen = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <Image source={images.buidingpc} style={appStyle.brokenImage} />
+      <Image source={images.text} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.btnplay} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
-        <View style={appStyle.popupView}>
-          <ImageBackground style={appStyle.popupImage} source={images.board}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.btnexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </ImageBackground>
-        </View>
-      )}
+      <View style={appStyle.popupView}>
+        <ImageBackground style={appStyle.popupImage} source={images.board}>
+          <TouchableOpacity onPress={() => setPopup(false)}>
+            <Image source={images.btnexit} style={appStyle.okBtn} />
+          </TouchableOpacity>
+        </ImageBackground>
+      </View>)}
     </ImageBackground>
   );
 };
+
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -89,7 +89,7 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   labelText: {
-    fontSize: 30,
+    fontSize:30,
     fontWeight: 'bold',
     color: '#d8b58a',
   },
@@ -132,8 +132,8 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
-    color: 'black',
+    fontFamily: 'MontserratAlternates-Black',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -141,8 +141,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.3,
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
   },
   itemView: {

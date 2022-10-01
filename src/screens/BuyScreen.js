@@ -8,7 +8,6 @@ import {
   Alert,
   ActivityIndicator,
   TouchableOpacity,
-  Image,
   ScrollView,
 } from 'react-native';
 
@@ -87,6 +86,17 @@ export default function Buy() {
       case items[3].sku:
         dispatch(increamentByAmount(items[3].value));
         break;
+      case items[4].sku:
+        dispatch(increamentByAmount(items[4].value));
+        break;
+      case items[5].sku:
+        dispatch(increamentByAmount(items[5].value));
+        break;
+      case items[6].sku:
+        dispatch(increamentByAmount(items[6].value));
+        break;
+      case items[7].sku:
+        dispatch(increamentByAmount(items[7].value));
       default:
         break;
     }

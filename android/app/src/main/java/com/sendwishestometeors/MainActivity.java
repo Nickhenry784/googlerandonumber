@@ -1,4 +1,4 @@
-package com.olesimonis.randonumber;
+package com.alexandredeckow.selectednumber;
 
 import com.facebook.react.ReactActivity;
 
