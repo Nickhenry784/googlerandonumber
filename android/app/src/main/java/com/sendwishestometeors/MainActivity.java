@@ -1,4 +1,4 @@
-package com.walterblick.barkforfun;
+package com.walterblick.barkforfunanimal;
 
 import com.facebook.react.ReactActivity;
 
