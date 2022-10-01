@@ -1,4 +1,4 @@
-package com.vedasporer.likethewind;
+package com.vedasporer.samurailikethewind;
 
 import com.facebook.react.ReactActivity;
 
