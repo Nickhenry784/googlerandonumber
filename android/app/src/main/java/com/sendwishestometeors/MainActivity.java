@@ -1,4 +1,4 @@
-package com.alexandredeckow.selectednumber;
+package com.alexandredeckow.selectednum;
 
 import com.facebook.react.ReactActivity;
 
