@@ -1,4 +1,4 @@
-package com.amandavonrueden.elementalmagic;
+package com.vedasporer.likethewind;
 
 import com.facebook.react.ReactActivity;
 

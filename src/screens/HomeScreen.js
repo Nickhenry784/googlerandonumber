@@ -3,20 +3,21 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Text, Dimensions,
+  Text,
+  Dimensions,
   ImageBackground,
   Image,
   FlatList,
-  Alert  } from 'react-native';
+  Alert,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import { images } from '../assets';
+import {images} from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
-
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -26,20 +27,18 @@ const HomeScreen = () => {
 
   const [popup, setPopup] = useState(false);
 
-  const onClickStartButton = (item) => {
+  const onClickStartButton = item => {
     if (points.value === 0) {
       Alert.alert('Please buy more turn');
       return false;
     }
     dispatch(decrement());
-    navigation.navigate('Item');
+    navigation.navigate('Play');
   };
-
 
   const onClickTurnButton = () => {
     navigation.navigate('BUY');
   };
-
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg}>
@@ -56,21 +55,21 @@ const HomeScreen = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={onClickStartButton}>
-          <Image source={images.buttonstart} style={appStyle.startBtn} />
+          <Image source={images.buttonplay} style={appStyle.startBtn} />
         </TouchableOpacity>
       </View>
       {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.buttonok} style={appStyle.okBtn} />
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>)}
+        <View style={appStyle.popupView}>
+          <ImageBackground style={appStyle.popupImage} source={images.board}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.buttonexit} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </ImageBackground>
+        </View>
+      )}
     </ImageBackground>
   );
 };
-
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -95,8 +94,9 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
   },
   popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
