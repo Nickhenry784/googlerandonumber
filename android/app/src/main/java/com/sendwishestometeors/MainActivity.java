@@ -1,4 +1,4 @@
-package com.vedasporer.likethewind;
+package com.walterblick.barkforfun;
 
 import com.facebook.react.ReactActivity;
 
