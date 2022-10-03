@@ -3,16 +3,18 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Text, Dimensions,
+  Text,
+  Dimensions,
   ImageBackground,
   Image,
   FlatList,
-  Alert  } from 'react-native';
+  Alert,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import { images } from '../assets';
+import {images} from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -31,24 +33,13 @@ const HomeScreen = () => {
   };
 
   const onClickStartButton = () => {
-    if (points.value <= 0){
+    if (points.value <= 0) {
       Alert.alert('Please buy more turn!');
       return false;
     }
     dispatch(decrement());
-    navigation.navigate('Boy');
+    navigation.navigate('Item');
   };
-
-  const onClickStartButton1 = () => {
-    if (points.value <= 0){
-      Alert.alert('Please buy more turn!');
-      return false;
-    }
-    dispatch(decrement());
-    navigation.navigate('Girl');
-  };
-
-
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg1}>
@@ -65,26 +56,23 @@ const HomeScreen = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnboy} style={appStyle.itemView} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onClickStartButton1()}>
-          <Image source={images.btngirl} style={appStyle.itemView} />
+          <Image source={images.btnplay} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <View style={appStyle.closeView}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.btnexit} style={appStyle.okBtn} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>)}
+        <View style={appStyle.popupView}>
+          <ImageBackground style={appStyle.popupImage} source={images.board}>
+            <View style={appStyle.closeView}>
+              <TouchableOpacity onPress={() => setPopup(false)}>
+                <Image source={images.btnexit} style={appStyle.okBtn} />
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        </View>
+      )}
     </ImageBackground>
   );
 };
-
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -97,19 +85,19 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.7,
-    height: windowHeight * 0.15,
+    height: windowHeight * 0.2,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   labelText: {
-    fontSize:30,
-    fontFamily: 'IndieFlower',
-    color: 'black',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#d8b58a',
   },
   closeView: {
     position: 'absolute',
-    top: '5%',
-    right: '0%',
+    top: '0%',
+    right: '-10%',
   },
   popupView: {
     width: windowWidth,
@@ -124,12 +112,12 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   okBtn: {
-    width: windowWidth * 0.1,
+    width: windowWidth * 0.3,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   appBar: {
-    height: windowHeight * 0.1,
+    flex: 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -144,9 +132,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: 30,
-    fontFamily: 'IndieFlower',
-    color: 'black',
+    fontSize: windowWidth > 640 ? 30 : 25,
+    fontWeight: 'bold',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -160,7 +148,7 @@ export const appStyle = StyleSheet.create({
   },
   itemView: {
     width: windowWidth * 0.4,
-    height: windowWidth * 0.4,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   text: {
@@ -169,10 +157,10 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   bottomView: {
-    height: windowHeight * 0.6,
+    flex: 0.9,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   phoneImage: {
     width: windowWidth * 0.5,

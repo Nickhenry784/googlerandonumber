@@ -1,4 +1,4 @@
-package com.orieterry.flawedface;
+package com.ryannschultz.guessfood;
 
 import com.facebook.react.ReactActivity;
 

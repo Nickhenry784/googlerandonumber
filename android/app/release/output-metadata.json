@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.orieterry.flawedface",
+  "applicationId": "com.ryannschultz.guessfood",
   "variantName": "release",
   "elements": [
     {
