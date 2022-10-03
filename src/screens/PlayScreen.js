@@ -17,25 +17,21 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bear, music: 'bear.mp3'},
-  {id: 2, bg: images.bee, music: 'bee.mp3'},
-  {id: 3, bg: images.butterfly, music: 'butterfly.mp3'},
-  {id: 4, bg: images.dragonfly, music: 'dragonfly.mp3'},
-  {id: 5, bg: images.duck, music: 'duck.mp3'},
-  {id: 6, bg: images.eagle, music: 'eagle.mp3'},
-  {id: 7, bg: images.elephant, music: 'elephant.mp3'},
-  {id: 8, bg: images.giraffe, music: 'giraffe.mp3'},
-  {id: 9, bg: images.lion, music: 'lion.mp3'},
-  {id: 10, bg: images.ostrich, music: 'ostrich.mp3'},
-  {id: 11, bg: images.owl, music: 'owl.mp3'},
-  {id: 12, bg: images.owl, music: 'pigeon.mp3'},
-  {id: 13, bg: images.owl, music: 'turkey.mp3'},
+  {id: 1, bg: images.earth, music: 'earth.mp3'},
+  {id: 2, bg: images.jupiter, music: 'jupiter.mp3'},
+  {id: 3, bg: images.mars, music: 'mars.mp3'},
+  {id: 4, bg: images.mercury, music: 'mercury.mp3'},
+  {id: 5, bg: images.neptune, music: 'neptune.mp3'},
+  {id: 6, bg: images.saturn, music: 'saturn.mp3'},
+  {id: 7, bg: images.sun, music: 'sun.mp3'},
+  {id: 8, bg: images.uranus, music: 'uranus.mp3'},
+  {id: 9, bg: images.venus, music: 'venus.mp3'},
 ];
 
 
 Sound.setCategory('Playback');
 
-var whoosh = new Sound('bear.mp3', Sound.MAIN_BUNDLE, (error) => {
+var whoosh = new Sound('earth.mp3', Sound.MAIN_BUNDLE, (error) => {
   if (error) {
     console.log('failed to load the sound', error);
     return;
@@ -92,7 +88,7 @@ const PlayScreen = ({navigation, route}) => {
     <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.closeView}>
         <TouchableOpacity onPress={() => onClickCloseBtn()}>
-          <Image source={images.buttonexit} style={appStyle.btnCl} />
+          <Image source={images.btnback} style={appStyle.btnCl} />
         </TouchableOpacity>
       </View>
       <View style={appStyle.centerView}>
@@ -100,16 +96,16 @@ const PlayScreen = ({navigation, route}) => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickLeftBtn()}>
-          <Image source={images.buttonleft} style={appStyle.btn} />
+          <Image source={images.btnleft} style={appStyle.btn} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickPlayBtn()}>
-          <Image source={images.play} style={appStyle.btn} />
+          <Image source={images.play} style={appStyle.btn1} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickPauseBtn()}>
-          <Image source={images.pause} style={appStyle.btn} />
+          <Image source={images.pause} style={appStyle.btn1} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onClickRightBtn()}>
-          <Image source={images.buttonright} style={appStyle.btn} />
+          <Image source={images.btnright} style={appStyle.btn} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -140,9 +136,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: windowHeight * 0.5,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    bottom: '10%',
+    justifyContent: 'center',
   },
   btnClose: {
     width: windowWidth * 0.6,
@@ -150,8 +144,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   btnCl: {
-    width: windowWidth * 0.1,
-    height: windowHeight * 0.1,
+    width: windowWidth * 0.2,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
   },
   waterImage: {
@@ -162,6 +156,11 @@ export const appStyle = StyleSheet.create({
   btn: {
     width: windowWidth * 0.2,
     height: windowHeight * 0.2,
+    resizeMode: 'contain',
+  },
+  btn1: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.3,
     resizeMode: 'contain',
   },
   bottomView: {

@@ -1,4 +1,4 @@
-package com.bertrandpadberg.aniworldsound;
+package com.gradyconnelly.thesolarsystem;
 
 import com.facebook.react.ReactActivity;
 

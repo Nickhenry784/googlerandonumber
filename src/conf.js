@@ -1,35 +1,35 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.worldsound_1',
+    sku: 'com.solarsystem_1',
     value: 10,
   },
   {
-    sku: 'com.worldsound_2',
+    sku: 'com.solarsystem_2',
     value: 50,
   },
   {
-    sku: 'com.worldsound_3',
+    sku: 'com.solarsystem_3',
     value: 100,
   },
   {
-    sku: 'com.worldsound_4',
+    sku: 'com.solarsystem_4',
     value: 200,
   },
   {
-    sku: 'com.worldsound_5',
+    sku: 'com.solarsystem_5',
     value: 400,
   },
   {
-    sku: 'com.worldsound_6',
+    sku: 'com.solarsystem_6',
     value: 600,
   },
   {
-    sku: 'com.worldsound_7',
+    sku: 'com.solarsystem_7',
     value: 800,
   },
   {
-    sku: 'com.worldsound_8',
+    sku: 'com.solarsystem_8',
     value: 1000,
   },
 ];
