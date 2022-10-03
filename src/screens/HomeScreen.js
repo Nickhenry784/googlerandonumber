@@ -15,9 +15,31 @@ import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {images} from '../assets';
+import Sound from 'react-native-sound';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
+
+Sound.setCategory('Playback');
+
+var whoosh = new Sound('tiengchuongxedap.mp3', Sound.MAIN_BUNDLE, error => {
+  if (error) {
+    console.log('failed to load the sound', error);
+    return;
+  }
+  whoosh.setVolume(1);
+});
+
+const dataBg = [
+  {id: 1, bg: images.btnbicycle, music: 'tiengchuongxedap.mp3'},
+  {id: 2, bg: images.btnfiretruck, music: 'tiengcoicuuhoa.mp3'},
+  {id: 3, bg: images.btntrain, music: 'tiengcoitauhoa.mp3'},
+  {id: 4, bg: images.btnpolicecar, music: 'tiengcoixecanhsat.mp3'},
+  {id: 5, bg: images.btnambulance, music: 'tiengcoixecuuthuong.mp3'},
+  {id: 6, bg: images.btnhelicopter, music: 'tiengmaybaytructhang.mp3'},
+];
+
+const numCol = 2;
 
 const Home = () => {
   const navigation = useNavigation();
@@ -26,6 +48,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [popup, setPopup] = useState(false);
+  const [sound, setSound] = useState(whoosh);
 
   const onClickStartButton = () => {
     if (points.value === 0) {
@@ -33,7 +56,18 @@ const Home = () => {
       return false;
     }
     dispatch(decrement());
-    navigation.navigate('Play');
+    sound.play();
+  };
+
+  const onClickItemBtn = val => {
+    var whoosh = new Sound(val, Sound.MAIN_BUNDLE, error => {
+      if (error) {
+        console.log('failed to load the sound', error);
+        return;
+      }
+      whoosh.setVolume(1);
+    });
+    setSound(whoosh);
   };
 
   const onClickTurnButton = () => {
@@ -41,11 +75,11 @@ const Home = () => {
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buttonbuy} style={appStyle.scoreStyle} />
+            <Image source={images.butotnbuy} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
@@ -53,17 +87,29 @@ const Home = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.buttonstart} style={appStyle.bullImage} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => onClickStartButton()}>
+        <Image source={images.btnloudspeaker} style={appStyle.bullImage} />
+      </TouchableOpacity>
+      <FlatList
+        data={dataBg}
+        scrollEnabled={false}
+        numColumns={numCol}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            onPress={() => onClickItemBtn(item.music)}
+            key={item.id}>
+            <Image source={item.bg} style={appStyle.startBtn} />
+          </TouchableOpacity>
+        )}
+      />
       {popup && (
         <View style={appStyle.popupView}>
           <ImageBackground style={appStyle.popupImage} source={images.board}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.btnok} style={appStyle.okBtn} />
-            </TouchableOpacity>
+            <View style={appStyle.closeView}>
+              <TouchableOpacity onPress={() => setPopup(false)}>
+                <Image source={images.bthexit} style={appStyle.okBtn} />
+              </TouchableOpacity>
+            </View>
           </ImageBackground>
         </View>
       )}
@@ -86,7 +132,7 @@ export const appStyle = StyleSheet.create({
     right: '5%',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.05,
     width: '100%',
     paddingHorizontal: 10,
     marginTop: 20,
@@ -96,7 +142,7 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.8,
-    height: windowHeight * 0.3,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -119,7 +165,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   okBtn: {
-    width: windowWidth * 0.3,
+    width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
@@ -161,7 +207,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
   },
   labelText: {

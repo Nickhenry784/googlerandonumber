@@ -1,4 +1,4 @@
-package com.gradyconnelly.thesolarsystem;
+package com.maeganhyatt.hoothoot;
 
 import com.facebook.react.ReactActivity;
 

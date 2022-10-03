@@ -1,35 +1,35 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.solarsystem_1',
+    sku: 'com.hootho_1',
     value: 10,
   },
   {
-    sku: 'com.solarsystem_2',
+    sku: 'com.hootho_2',
     value: 50,
   },
   {
-    sku: 'com.solarsystem_3',
+    sku: 'com.hootho_3',
     value: 100,
   },
   {
-    sku: 'com.solarsystem_4',
+    sku: 'com.hootho_4',
     value: 200,
   },
   {
-    sku: 'com.solarsystem_5',
+    sku: 'com.hootho_5',
     value: 400,
   },
   {
-    sku: 'com.solarsystem_6',
+    sku: 'com.hootho_6',
     value: 600,
   },
   {
-    sku: 'com.solarsystem_7',
+    sku: 'com.hootho_7',
     value: 800,
   },
   {
-    sku: 'com.solarsystem_8',
+    sku: 'com.hootho_8',
     value: 1000,
   },
 ];
