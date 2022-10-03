@@ -1,4 +1,4 @@
-package com.maeganhyatt.hoothoot;
+package com.orieterry.flawedface;
 
 import com.facebook.react.ReactActivity;
 
