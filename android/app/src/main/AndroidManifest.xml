@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.cloydstokes.numberrivercalculator">
+  package="com.stefanrippin.reftattoo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

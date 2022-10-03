@@ -1,4 +1,4 @@
-package com.cloydstokes.numberrivercalculator;
+package com.stefanrippin.reftattoo;
 
 import com.facebook.react.ReactActivity;
 

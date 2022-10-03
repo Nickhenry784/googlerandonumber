@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.cloydstokes.numberrivercalculator",
+    package = "com.stefanrippin.reftattoo",
 )
 
 android_resource(
     name = "res",
-    package = "com.cloydstokes.numberrivercalculator",
+    package = "com.stefanrippin.reftattoo",
     res = "src/main/res",
 )
 

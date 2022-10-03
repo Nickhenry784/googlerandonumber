@@ -3,16 +3,17 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Text, Dimensions,
+  Text,
+  Dimensions,
   ImageBackground,
   Image,
-  FlatList,
-  Alert  } from 'react-native';
+  Alert,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import { images } from '../assets';
+import {images} from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -24,14 +25,12 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch();
 
-  const [popup, setPopup] = useState(false);
-
   const onClickTurnButton = () => {
     navigation.navigate('BUY');
   };
 
   const onClickStartButton = () => {
-    if (points.value <= 0){
+    if (points.value <= 0) {
       Alert.alert('Please buy more turn!');
       return false;
     }
@@ -39,37 +38,24 @@ const HomeScreen = () => {
     navigation.navigate('Item');
   };
 
-
-
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.background1}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.btnbuy} style={appStyle.buyImage} />
+            <Image source={images.buttonbuy} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
+      </View>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.buttonstart} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.btnplay} style={appStyle.itemView} />
-      </TouchableOpacity>
-      {popup && (
-      <View style={appStyle.popupView}>
-        <ImageBackground style={appStyle.popupImage} source={images.board}>
-          <TouchableOpacity onPress={() => setPopup(false)}>
-            <Image source={images.btnexit} style={appStyle.okBtn} />
-          </TouchableOpacity>
-
-        </ImageBackground>
-      </View>)}
     </ImageBackground>
   );
 };
-
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -80,41 +66,8 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
-  popupImage: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.3,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  labelText: {
-    fontSize:30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
-  },
-  closeView: {
-    position: 'absolute',
-    top: '5%',
-    right: '0%',
-  },
-  popupView: {
-    width: windowWidth,
-    height: windowHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(1, 1, 1, 0.7)',
-    position: 'absolute',
-    top: '0%',
-    left: '0%',
-    right: '0%',
-    bottom: '0%',
-  },
-  okBtn: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
-  },
   appBar: {
-    height: windowHeight * 0.1,
+    flex: 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -129,9 +82,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth < 600 ? 30 : 50,
-    fontFamily: 'chela-one.regular',
-    color: 'black',
+    fontSize: windowWidth > 640 ? 30 : 25,
+    fontWeight: 'bold',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -139,8 +92,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth,
-    height: windowHeight * 0.5,
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   itemView: {
@@ -149,7 +102,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   text: {
-    fontSize: 30,
+    fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
     color: 'white',
   },
