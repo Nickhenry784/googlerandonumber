@@ -1,4 +1,4 @@
-package com.brandonbergstrom.musicofstreamn;
+package com.bertrandpadberg.aniworldsound;
 
 import com.facebook.react.ReactActivity;
 

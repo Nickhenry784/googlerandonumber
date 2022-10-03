@@ -1,35 +1,35 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.cofstreamn_1',
+    sku: 'com.worldsound_1',
     value: 10,
   },
   {
-    sku: 'com.cofstreamn_2',
+    sku: 'com.worldsound_2',
     value: 50,
   },
   {
-    sku: 'com.cofstreamn_3',
+    sku: 'com.worldsound_3',
     value: 100,
   },
   {
-    sku: 'com.cofstreamn_4',
+    sku: 'com.worldsound_4',
     value: 200,
   },
   {
-    sku: 'com.cofstreamn_5',
+    sku: 'com.worldsound_5',
     value: 400,
   },
   {
-    sku: 'com.cofstreamn_6',
+    sku: 'com.worldsound_6',
     value: 600,
   },
   {
-    sku: 'com.cofstreamn_7',
+    sku: 'com.worldsound_7',
     value: 800,
   },
   {
-    sku: 'com.cofstreamn_8',
+    sku: 'com.worldsound_8',
     value: 1000,
   },
 ];

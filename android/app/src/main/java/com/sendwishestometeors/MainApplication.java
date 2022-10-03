@@ -1,4 +1,4 @@
-package com.brandonbergstrom.musicofstreamn;
+package com.bertrandpadberg.aniworldsound;
 
 import android.app.Application;
 import android.content.Context;
@@ -65,7 +65,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.brandonbergstrom.musicofstreamn.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.bertrandpadberg.aniworldsound.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);
