@@ -1,35 +1,35 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.tattoo_1',
+    sku: 'com.cofstreamn_1',
     value: 10,
   },
   {
-    sku: 'com.tattoo_2',
+    sku: 'com.cofstreamn_2',
     value: 50,
   },
   {
-    sku: 'com.tattoo_3',
+    sku: 'com.cofstreamn_3',
     value: 100,
   },
   {
-    sku: 'com.tattoo_4',
+    sku: 'com.cofstreamn_4',
     value: 200,
   },
   {
-    sku: 'com.tattoo_5',
+    sku: 'com.cofstreamn_5',
     value: 400,
   },
   {
-    sku: 'com.tattoo_6',
+    sku: 'com.cofstreamn_6',
     value: 600,
   },
   {
-    sku: 'com.tattoo_7',
+    sku: 'com.cofstreamn_7',
     value: 800,
   },
   {
-    sku: 'com.tattoo_8',
+    sku: 'com.cofstreamn_8',
     value: 1000,
   },
 ];

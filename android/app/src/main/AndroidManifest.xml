@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.stefanrippin.reftattoo">
+  package="com.brandonbergstrom.musicofstreamn">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

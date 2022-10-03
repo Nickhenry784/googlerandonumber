@@ -1,4 +1,4 @@
-package com.stefanrippin.reftattoo;
+package com.brandonbergstrom.musicofstreamn;
 
 import com.facebook.react.ReactActivity;
 
