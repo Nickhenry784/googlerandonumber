@@ -1,4 +1,4 @@
-package com.ryannschultz.guessfood;
+package com.scarlettlesch.kitchentipskta;
 
 import com.facebook.react.ReactActivity;
 

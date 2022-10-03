@@ -3,28 +3,31 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Text,
-  Dimensions,
+  Text, Dimensions,
   ImageBackground,
   Image,
   FlatList,
-  Alert,
-} from 'react-native';
+  Alert  } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {images} from '../assets';
+import { images } from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
+
+const brokenData = [
+  {id: 1, image: images.chooseTheRightPanWhenCooking, background: images.bgChooseTheRight, title: 'Choose The Right Pan When Cooking'},
+  {id: 2, image: images.coolDownTheCoffee, background: images.bgCoolDown, title: 'Cool Down The Coffee'},
+  {id: 3, image: images.useTheFreezerToStoreFoodLonger, background: images.bgUseTheFreezer, title: 'Use The Freezer To Store Food Longer'},
+  {id: 4, image: images.tipsToPeelGarlicQuickly, background: images.bgTipsToPeel, title: 'Tips To Peel Garlic Quickly'},
+];
 
 const HomeScreen = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
-
-  const [popup, setPopup] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -32,47 +35,45 @@ const HomeScreen = () => {
     navigation.navigate('BUY');
   };
 
-  const onClickStartButton = () => {
-    if (points.value <= 0) {
+  const onClickStartButton = (backgrou, titleN) => {
+    if (points.value <= 0){
       Alert.alert('Please buy more turn!');
       return false;
     }
     dispatch(decrement());
-    navigation.navigate('Item');
+    navigation.navigate('Item', {
+      background: backgrou,
+      name: titleN,
+    });
   };
 
+
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.btnbuy} style={appStyle.buyImage} />
+            <Image source={images.pan} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.note} style={appStyle.buyImage} />
-        </TouchableOpacity>
       </View>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnplay} style={appStyle.itemView} />
-        </TouchableOpacity>
+      <Image source={images.kitchenTips} style={appStyle.labelImage} />
+      <View style={appStyle.centerView}>
+        <FlatList
+          data={brokenData}
+          scrollEnabled={false}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => onClickStartButton(item.background, item.title)}>
+              <Image source={item.image} style={appStyle.itemView} />
+            </TouchableOpacity>
+          )}
+        />
       </View>
-      {popup && (
-        <View style={appStyle.popupView}>
-          <ImageBackground style={appStyle.popupImage} source={images.board}>
-            <View style={appStyle.closeView}>
-              <TouchableOpacity onPress={() => setPopup(false)}>
-                <Image source={images.btnexit} style={appStyle.okBtn} />
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        </View>
-      )}
     </ImageBackground>
   );
 };
+
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -80,41 +81,8 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
-  },
-  popupImage: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  labelText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
-  },
-  closeView: {
-    position: 'absolute',
-    top: '0%',
-    right: '-10%',
-  },
-  popupView: {
-    width: windowWidth,
-    height: windowHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(1, 1, 1, 0.7)',
-    position: 'absolute',
-    top: '0%',
-    left: '0%',
-    right: '0%',
-    bottom: '0%',
-  },
-  okBtn: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
   },
   appBar: {
     flex: 0.1,
@@ -126,7 +94,7 @@ export const appStyle = StyleSheet.create({
   },
   turnView: {
     flexDirection: 'row',
-    width: windowWidth * 0.15,
+    width: windowWidth * 0.2,
     height: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -134,7 +102,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -142,32 +110,31 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.3,
-    resizeMode: 'contain',
-  },
-  itemView: {
     width: windowWidth * 0.4,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
+  itemView: {
+    width: windowWidth * 0.8,
+    height: windowWidth > 600 ? windowWidth * 0.25 : windowWidth * 0.3,
+    resizeMode: 'contain',
+  },
   text: {
-    fontSize: 30,
+    fontSize: windowWidth > 640 ? 30 : 25,
     fontWeight: 'bold',
     color: 'white',
   },
-  bottomView: {
+  labelImage: {
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.2,
+    resizeMode: 'contain',
+  },
+  centerView: {
     flex: 0.9,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
-    resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
+    justifyContent: 'flex-end',
+    resizeMode: 'cover',
   },
 });
 
