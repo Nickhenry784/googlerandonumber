@@ -1,4 +1,4 @@
-package com.bertrandpadberg.aniworldsound;
+package com.goldenrohan.fruitsandvegetables;
 
 import com.facebook.react.ReactActivity;
 
