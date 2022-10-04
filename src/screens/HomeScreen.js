@@ -3,32 +3,22 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Text,
-  Dimensions,
+  Text, Dimensions,
   ImageBackground,
   Image,
   FlatList,
-  Alert,
-} from 'react-native';
+  Alert  } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {images} from '../assets';
+import { images } from '../assets';
 import Sound from 'react-native-sound';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-Sound.setCategory('Playback');
 
-var whoosh = new Sound('tiengsuoichay.mp3', Sound.MAIN_BUNDLE, error => {
-  if (error) {
-    console.log('failed to load the sound', error);
-    return;
-  }
-  whoosh.setVolume(1);
-});
 
 const Home = () => {
   const navigation = useNavigation();
@@ -44,12 +34,14 @@ const Home = () => {
       return false;
     }
     dispatch(decrement());
-    whoosh.play();
+    navigation.navigate('Play');
   };
+
 
   const onClickTurnButton = () => {
     navigation.navigate('BUY');
   };
+
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg}>
@@ -64,26 +56,25 @@ const Home = () => {
           <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.buttonplay} style={appStyle.bullImage} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => whoosh.pause()}>
-        <Image source={images.buttonstop} style={appStyle.bullImage} />
-      </TouchableOpacity>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.buttonplay} style={appStyle.bullImage} />
+        </TouchableOpacity>
+      </View>
       {popup && (
-        <View style={appStyle.popupView}>
-          <ImageBackground style={appStyle.popupImage} source={images.board}>
-            <View style={appStyle.closeView}>
-              <TouchableOpacity onPress={() => setPopup(false)}>
-                <Image source={images.buttonexit} style={appStyle.okBtn} />
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        </View>
-      )}
+      <View style={appStyle.popupView}>
+        <ImageBackground style={appStyle.popupImage} source={images.board}>
+          <View style={appStyle.closeView}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.buttonexit} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </View>)}
     </ImageBackground>
   );
 };
+
 
 export const appStyle = StyleSheet.create({
   homeView: {
