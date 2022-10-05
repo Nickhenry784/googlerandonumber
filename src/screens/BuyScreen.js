@@ -148,8 +148,9 @@ export default function Buy() {
         <ActivityIndicator />
       ) : (
         <>
+          <Text style={styles.title}>In-App Purchase</Text>
           <View style={styles.itemList3}>
-            <Text>In-App Purchase</Text>
+
             {products.map((product, index) => (
               <View style={styles.item3} key={product.productId}>
                 <TouchableOpacity
@@ -160,7 +161,11 @@ export default function Buy() {
                 </TouchableOpacity>
               </View>
             ))}
-            <Text>Subscriptions</Text>
+
+          </View>
+          <Text style={styles.title}>Subscriptions</Text>
+          <View style={styles.itemList3}>
+
             {sub.map((subItem, index) => (
               <View style={styles.item3} key={subItem.productId}>
                 <TouchableOpacity
@@ -219,6 +224,11 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: 'bold',
     fontSize: 16,
+    color: '#212121',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 25,
     color: '#212121',
   },
   descr: {
