@@ -1,4 +1,4 @@
-package com.bertrandpadberg.aniworldsound;
+package com.bertrandpadberg.aniworld;
 
 import com.facebook.react.ReactActivity;
 
