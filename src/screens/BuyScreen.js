@@ -16,7 +16,7 @@ import RNIap, {
   finishTransaction,
 } from 'react-native-iap';
 import {useDispatch} from 'react-redux';
-import {items} from '../conf';
+import {items, subs} from '../conf';
 import {increamentByAmount} from '../redux/pointSlice';
 
 let purchaseUpdateSubscription = null;
@@ -27,6 +27,7 @@ export default function Buy() {
   // const [isLoading, setIsLoading] = useState(false);
 
   const [products, setProducts] = useState([]);
+  const [sub, setSub] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -51,7 +52,11 @@ export default function Buy() {
 
       const res = await RNIap.getProducts(items.map(item => item.sku));
 
+      const subsResquest = await RNIap.getSubscriptions(subs.map(item => item.sku));
+
       setProducts(res);
+
+      setSub(subsResquest);
     } catch (err) {
       Alert.alert(err.message);
       // console.warn(err.code, err.message);
@@ -97,6 +102,31 @@ export default function Buy() {
         break;
       case items[7].sku:
         dispatch(increamentByAmount(items[7].value));
+        break;
+      case subs[0].sku:
+        dispatch(increamentByAmount(subs[0].value));
+        break;
+      case subs[1].sku:
+        dispatch(increamentByAmount(subs[1].value));
+        break;
+      case subs[2].sku:
+        dispatch(increamentByAmount(subs[2].value));
+        break;
+      case subs[3].sku:
+        dispatch(increamentByAmount(subs[3].value));
+        break;
+      case subs[4].sku:
+        dispatch(increamentByAmount(subs[4].value));
+        break;
+      case subs[5].sku:
+        dispatch(increamentByAmount(subs[5].value));
+        break;
+      case subs[6].sku:
+        dispatch(increamentByAmount(subs[6].value));
+        break;
+      case subs[7].sku:
+        dispatch(increamentByAmount(subs[7].value));
+        break;
       default:
         break;
     }
@@ -104,6 +134,10 @@ export default function Buy() {
 
   const handleRequestBuy = productId => {
     RNIap.requestPurchase(productId);
+  };
+
+  const handleRequestSubscription = productId => {
+    RNIap.requestSubscription(productId);
   };
 
   return (
@@ -115,6 +149,7 @@ export default function Buy() {
       ) : (
         <>
           <View style={styles.itemList3}>
+            <Text style={styles.localizedPrice}>In-App Purchase</Text>
             {products.map((product, index) => (
               <View style={styles.item3} key={product.productId}>
                 <TouchableOpacity
@@ -122,6 +157,17 @@ export default function Buy() {
                   style={styles.item3Content}>
                   <Text style={styles.price}>{product.localizedPrice}</Text>
                   <Text style={styles.descr}>{product.description}</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+            <Text style={styles.localizedPrice}>Subscriptions</Text>
+            {sub.map((subItem, index) => (
+              <View style={styles.item3} key={subItem.productId}>
+                <TouchableOpacity
+                  onPress={() => handleRequestSubscription(subItem.productId)}
+                  style={styles.item3Content}>
+                  <Text style={styles.price}>{subItem.localizedPrice}</Text>
+                  <Text style={styles.descr}>{subItem.description}</Text>
                 </TouchableOpacity>
               </View>
             ))}
