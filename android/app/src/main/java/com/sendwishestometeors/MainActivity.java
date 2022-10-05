@@ -1,4 +1,4 @@
-package com.cloydstokes.numberrivercalculator;
+package com.cloydstokes.numberriver;
 
 import com.facebook.react.ReactActivity;
 

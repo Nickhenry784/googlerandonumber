@@ -1,35 +1,70 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.ercalculator_1',
+    sku: 'com.berriver_1',
     value: 10,
   },
   {
-    sku: 'com.ercalculator_2',
+    sku: 'com.berriver_2',
     value: 50,
   },
   {
-    sku: 'com.ercalculator_3',
+    sku: 'com.berriver_3',
     value: 100,
   },
   {
-    sku: 'com.ercalculator_4',
+    sku: 'com.berriver_4',
     value: 200,
   },
   {
-    sku: 'com.ercalculator_5',
+    sku: 'com.berriver_5',
     value: 400,
   },
   {
-    sku: 'com.ercalculator_6',
+    sku: 'com.berriver_6',
     value: 600,
   },
   {
-    sku: 'com.ercalculator_7',
+    sku: 'com.berriver_7',
     value: 800,
   },
   {
-    sku: 'com.ercalculator_8',
+    sku: 'com.berriver_8',
+    value: 1000,
+  },
+];
+
+export const subs = [
+  {
+    sku: 'com.berriver_sub_1',
+    value: 10,
+  },
+  {
+    sku: 'com.berriver_sub_2',
+    value: 50,
+  },
+  {
+    sku: 'com.berriver_sub_3',
+    value: 100,
+  },
+  {
+    sku: 'com.berriver_sub_4',
+    value: 200,
+  },
+  {
+    sku: 'com.berriver_sub_5',
+    value: 400,
+  },
+  {
+    sku: 'com.berriver_sub_6',
+    value: 600,
+  },
+  {
+    sku: 'com.berriver_sub_7',
+    value: 800,
+  },
+  {
+    sku: 'com.berriver_sub_8',
     value: 1000,
   },
 ];
