@@ -41,6 +41,15 @@ const HomeScreen = () => {
     navigation.navigate('Item');
   };
 
+  const onClickStartButton1 = () => {
+    if (points.value <= 0) {
+      Alert.alert('Please buy more turn!');
+      return false;
+    }
+    dispatch(decrement());
+    navigation.navigate('Item1');
+  };
+
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg1}>
       <View style={appStyle.appBar}>
@@ -56,7 +65,10 @@ const HomeScreen = () => {
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btnplay} style={appStyle.itemView} />
+          <Image source={images.btnboy} style={appStyle.itemView} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onClickStartButton1()}>
+          <Image source={images.btngirl} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
       {popup && (
@@ -85,19 +97,19 @@ export const appStyle = StyleSheet.create({
   },
   popupImage: {
     width: windowWidth * 0.7,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.15,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   labelText: {
     fontSize: 30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
+    fontFamily: 'IndieFlower',
+    color: 'black',
   },
   closeView: {
     position: 'absolute',
-    top: '0%',
-    right: '-10%',
+    top: '5%',
+    right: '0%',
   },
   popupView: {
     width: windowWidth,
@@ -112,12 +124,12 @@ export const appStyle = StyleSheet.create({
     bottom: '0%',
   },
   okBtn: {
-    width: windowWidth * 0.3,
+    width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -132,9 +144,9 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 30,
+    fontFamily: 'IndieFlower',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -148,7 +160,7 @@ export const appStyle = StyleSheet.create({
   },
   itemView: {
     width: windowWidth * 0.4,
-    height: windowWidth * 0.2,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
   },
   text: {
@@ -157,10 +169,10 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   bottomView: {
-    flex: 0.9,
+    height: windowHeight * 0.6,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   phoneImage: {
     width: windowWidth * 0.5,
