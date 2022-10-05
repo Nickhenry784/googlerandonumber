@@ -1,4 +1,4 @@
-package com.amandavonrueden.luckyelementalmagic;
+package com.amandavonrueden.elementalmagic;
 
 import com.facebook.react.ReactActivity;
 
