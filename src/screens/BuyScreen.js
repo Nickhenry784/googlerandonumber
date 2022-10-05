@@ -148,8 +148,9 @@ export default function Buy() {
         <ActivityIndicator />
       ) : (
         <>
+          <Text style={styles.localizedPrice}>In-App Purchase</Text>
           <View style={styles.itemList3}>
-            <Text style={styles.localizedPrice}>In-App Purchase</Text>
+
             {products.map((product, index) => (
               <View style={styles.item3} key={product.productId}>
                 <TouchableOpacity
@@ -160,7 +161,11 @@ export default function Buy() {
                 </TouchableOpacity>
               </View>
             ))}
-            <Text style={styles.localizedPrice}>Subscriptions</Text>
+
+          </View>
+          <Text style={styles.localizedPrice}>Subscriptions</Text>
+          <View style={styles.itemList3}>
+
             {sub.map((subItem, index) => (
               <View style={styles.item3} key={subItem.productId}>
                 <TouchableOpacity
