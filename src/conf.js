@@ -1,70 +1,70 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.tontipsb_1',
+    sku: 'com.ketball_1',
     value: 10,
   },
   {
-    sku: 'com.tontipsb_2',
+    sku: 'com.ketball_2',
     value: 50,
   },
   {
-    sku: 'com.tontipsb_3',
+    sku: 'com.ketball_3',
     value: 100,
   },
   {
-    sku: 'com.tontipsb_4',
+    sku: 'com.ketball_4',
     value: 200,
   },
   {
-    sku: 'com.tontipsb_5',
+    sku: 'com.ketball_5',
     value: 400,
   },
   {
-    sku: 'com.tontipsb_6',
+    sku: 'com.ketball_6',
     value: 600,
   },
   {
-    sku: 'com.tontipsb_7',
+    sku: 'com.ketball_7',
     value: 800,
   },
   {
-    sku: 'com.tontipsb_8',
+    sku: 'com.ketball_8',
     value: 1000,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.tontipsb_sub_1',
+    sku: 'com.ketball_sub_1',
     value: 10,
   },
   {
-    sku: 'com.tontipsb_sub_2',
+    sku: 'com.ketball_sub_2',
     value: 50,
   },
   {
-    sku: 'com.tontipsb_sub_3',
+    sku: 'com.ketball_sub_3',
     value: 100,
   },
   {
-    sku: 'com.tontipsb_sub_4',
+    sku: 'com.ketball_sub_4',
     value: 200,
   },
   {
-    sku: 'com.tontipsb_sub_5',
+    sku: 'com.ketball_sub_5',
     value: 400,
   },
   {
-    sku: 'com.tontipsb_sub_6',
+    sku: 'com.ketball_sub_6',
     value: 600,
   },
   {
-    sku: 'com.tontipsb_sub_7',
+    sku: 'com.ketball_sub_7',
     value: 800,
   },
   {
-    sku: 'com.tontipsb_sub_8',
+    sku: 'com.ketball_sub_8',
     value: 1000,
   },
 ];

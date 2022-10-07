@@ -46,7 +46,7 @@ export const appStyle = StyleSheet.create({
   },
   welcomeImage: {
     width: windowWidth,
-    height: windowHeight * 1.2,
+    height: windowWidth > 600 ? windowHeight * 1.2 : windowHeight,
     resizeMode: 'cover',
   },
 });
