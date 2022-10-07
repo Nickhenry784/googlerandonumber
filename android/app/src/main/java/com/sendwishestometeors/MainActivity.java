@@ -1,4 +1,4 @@
-package com.zandersipes.volleyballtipsvla;
+package com.adellegoodwin.connectpictureswithletterscpwl;
 
 import com.facebook.react.ReactActivity;
 
