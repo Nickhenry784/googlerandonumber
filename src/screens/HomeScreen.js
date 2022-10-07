@@ -22,27 +22,33 @@ const windowHeight = Dimensions.get('screen').height;
 const brokenData = [
   {
     id: 1,
-    image: images.passTheBallHigh,
-    background: images.bgPass,
-    title: 'Pass The Ball High',
+    image: images.standing,
+    background: images.bgstanding,
+    title: 'Standing',
   },
   {
     id: 2,
-    image: images.kickTheBall,
-    background: images.bgKick,
-    title: 'Kick The Ball',
+    image: images.bridgedam,
+    background: images.bgbridgedam,
+    title: 'Bridgedam',
   },
   {
     id: 3,
-    image: images.hitTheBall,
-    background: images.bgHit,
-    title: 'Hit The Ball',
+    image: images.holdaracket,
+    background: images.bgholdaracket,
+    title: 'Holdaracket',
   },
   {
     id: 4,
-    image: images.blockTheBall,
-    background: images.bgBlock,
-    title: 'Block The Ball',
+    image: images.leavesmall,
+    background: images.bgleavessmall,
+    title: 'Leaves Small',
+  },
+  {
+    id: 5,
+    image: images.Practicetheserve,
+    background: images.bgPracticetheserve,
+    title: 'Practice The Serve',
   },
 ];
 
@@ -74,14 +80,12 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.ball} style={appStyle.buyImage} />
+            <Image source={images.eye} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '10%'}}>
-        <Image source={images.volleyballTips} style={appStyle.labelImage} />
-      </View>
+      <Image source={images.BadmintonTips} style={appStyle.labelImage} />
       <View style={appStyle.centerView}>
         <FlatList
           data={brokenData}
@@ -101,11 +105,11 @@ const HomeScreen = () => {
 export const appStyle = StyleSheet.create({
   homeView: {
     flex: 1,
-    width: '100%',
-    height: '100%',
+    width: windowWidth,
+    height: windowHeight,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   appBar: {
     position: 'absolute',
@@ -136,7 +140,7 @@ export const appStyle = StyleSheet.create({
   },
   itemView: {
     width: windowWidth * 0.8,
-    height: windowWidth > 600 ? windowWidth * 0.25 : windowWidth * 0.3,
+    height: windowWidth > 600 ? windowWidth * 0.18 : windowWidth * 0.2,
     resizeMode: 'contain',
   },
   text: {

@@ -1,4 +1,4 @@
-package com.zandersipes.volleyballtipsvla;
+package com.salvatoreroob.badmintontipsbta;
 
 import com.facebook.react.ReactActivity;
 
