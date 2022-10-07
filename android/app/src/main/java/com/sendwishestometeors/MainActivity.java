@@ -1,4 +1,4 @@
-package com.carolinerogahn.basketballtipsaps;
+package com.asashanahan.guessofthethreekingdomsgot;
 
 import com.facebook.react.ReactActivity;
 
