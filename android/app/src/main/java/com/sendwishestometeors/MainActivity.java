@@ -1,4 +1,4 @@
-package com.carolinerogahn.basketballtipsaps;
+package com.beaulahdurgan.samuraiimysterii;
 
 import com.facebook.react.ReactActivity;
 

@@ -22,30 +22,40 @@ const windowHeight = Dimensions.get('screen').height;
 const brokenData = [
   {
     id: 1,
-    image: images.basketthrowingtechniques,
+    image: images.samuraiarenotjustwarriors,
     background: images.a3,
-    title: 'Basket Thowring Techniques',
+    title: 'Samurai Are Not Just Warriors',
   },
-  {id: 2, image: images.defense, background: images.a4, title: 'Defense'},
+  {
+    id: 2,
+    image: images.samuraiarepacifists,
+    background: images.a6,
+    title: 'Samurai Are Pacifists',
+  },
   {
     id: 3,
-    image: images.LEADINGTHEFLAG,
-    background: images.a2,
-    title: 'Leading The Flag',
+    image: images.samuraidoesntreallycomefromjapan,
+    background: images.a4,
+    title: "Samurai Doesn't Really Come From Japan",
   },
   {
     id: 4,
-    image: images.SHOULDSHOULDVATTHECHALLENGE,
-    background: images.a6,
-    title: 'Should Should V At The Challenge',
+    image: images.samuraifightersalwaysnametheirswords,
+    background: images.a5,
+    title: 'Samurai Fighters Always Name Their Words',
   },
   {
     id: 5,
-    image: images.STUNNINGTECHNIQUESATTHECHAIN,
-    background: images.a1,
-    title: 'Stunning Techniques At The Chain',
+    image: images.therearemoresamuraiouttherethanyouthink,
+    background: images.a2,
+    title: 'There Are More Samurai Out There Than You Think',
   },
-  {id: 6, image: images.TARGET, background: images.a5, title: 'Target'},
+  {
+    id: 6,
+    image: images.thesamuraiswordisactuallyfromanothercountry,
+    background: images.a1,
+    title: 'The Samurais Word Is Actually From Another Country',
+  },
 ];
 
 const HomeScreen = () => {
@@ -76,12 +86,12 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.eye} style={appStyle.buyImage} />
+            <Image source={images.view} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.basketballtip} style={appStyle.labelImage} />
+      <Image source={images.samuraimysteri} style={appStyle.labelImage} />
       <View style={appStyle.centerView}>
         <FlatList
           data={brokenData}
