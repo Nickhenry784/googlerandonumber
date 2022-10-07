@@ -1,4 +1,4 @@
-package com.stefaniekoch.soccertipssta;
+package com.zandersipes.volleyballtipsvla;
 
 import com.facebook.react.ReactActivity;
 
