@@ -1,4 +1,4 @@
-package com.amandavonrueden.elementalmagic;
+package com.stefaniekoch.soccertipssta;
 
 import com.facebook.react.ReactActivity;
 
