@@ -1,4 +1,4 @@
-package com.sigmundkrajcik.guessoftheanimalnameegamegota;
+package com.amarahaag.guessoftheefruittgts;
 
 import com.facebook.react.ReactActivity;
 
