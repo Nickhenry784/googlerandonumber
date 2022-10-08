@@ -1,4 +1,4 @@
-package com.beaulahdurgan.samuraiimysterii;
+package com.domenicmcdermott.quickanddquickkqaq;
 
 import com.facebook.react.ReactActivity;
 
