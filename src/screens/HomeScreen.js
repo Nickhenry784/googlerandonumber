@@ -49,12 +49,10 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={() => onClickStartButton()}>
+        <Image source={images.play} style={appStyle.itemView} />
+      </TouchableOpacity>
       <Image source={images.name} style={appStyle.brokenImage} />
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.play} style={appStyle.itemView} />
-        </TouchableOpacity>
-      </View>
     </ImageBackground>
   );
 };
@@ -102,7 +100,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -118,7 +116,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
+    fontFamily: 'Fruitz Demo',
     color: 'black',
   },
   buyImage: {
@@ -127,8 +125,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.8,
-    height: windowWidth * 0.3,
+    width: windowWidth,
+    height: windowHeight * 0.5,
     resizeMode: 'contain',
   },
   itemView: {

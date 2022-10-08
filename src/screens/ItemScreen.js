@@ -10,87 +10,105 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  FlatList,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {images} from '../assets';
+var converter = require('number-to-words');
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.bg2},
-  {id: 2, bg: images.bg3},
-  {id: 3, bg: images.bg4},
-  {id: 4, bg: images.bg5},
-  {id: 5, bg: images.bg6},
-];
-
 const ItemScreen = ({navigation, route}) => {
-  const [text, setText] = useState(randomIntFromInterval(1, 20));
-  const [index, setIndex] = useState(randomIntFromInterval(0, 4));
+  const [text, setText] = useState([
+    randomIntFromInterval(0, 100),
+    randomIntFromInterval(0, 300),
+  ]);
+  const [result, setResult] = useState(
+    randomPost([
+      text[0] + text[1],
+      randomIntFromInterval(0, 600),
+      randomIntFromInterval(0, 600),
+    ]),
+  );
   const [score, setScore] = useState(0);
-  const [listItem, setListItem] = useState(handleListItem(text));
-  const [number, onChangeNumber] = useState(null);
+  const [time, setTime] = useState(10);
+  const [answer, setAnswer] = useState(0);
   const [popup, setPopup] = useState(false);
 
   useEffect(() => {
-    setListItem(handleListItem(text));
+    const timeOut = setTimeout(() => {
+      if (time > 0) {
+        setTime(time - 1);
+      }
+      if (time === 0) {
+        if (answer === text[0] + text[1]) {
+          setScore(score + 10);
+          setText([
+            randomIntFromInterval(0, 100),
+            randomIntFromInterval(0, 300),
+          ]);
+          setTime(10);
+          setAnswer(0);
+        } else {
+          setPopup(true);
+        }
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [time]);
+
+  useEffect(() => {
+    setResult(
+      randomPost([
+        text[0] + text[1],
+        randomIntFromInterval(0, 600),
+        randomIntFromInterval(0, 600),
+      ]),
+    );
   }, [text]);
 
-  const handleClickCheckBtn = () => {
-    if (number.toString() === text.toString()) {
-      setScore(score + 10);
-      setText(randomIntFromInterval(1, 20));
-      onChangeNumber(null);
-      setIndex(randomIntFromInterval(0, 4));
-    } else {
-      setPopup(true);
-    }
-  };
-
-  const handleClickRePlayBtn = () => {
-    setScore(0);
-    setText(randomIntFromInterval(1, 20));
-    onChangeNumber(null);
-    setIndex(randomIntFromInterval(0, 4));
-    setPopup(false);
+  const handleClickCheckBtn = val => {
+    setAnswer(val);
+    setTime(1);
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={dataBg[index].bg}>
+    <ImageBackground style={appStyle.homeView} source={images.bg}>
       <View style={appStyle.closeView}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.false} style={appStyle.btnClose} />
+          <Image source={images.home} style={appStyle.btnClose} />
         </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <View style={appStyle.centerView}>
-        {listItem.map(item => (
-          <View style={randomPos(item[0], item[1])} key={item}>
-            <Image source={images.pig} style={appStyle.pigImage} key={item} />
-          </View>
-        ))}
-      </View>
+      <Text style={appStyle.labelText}>{`${time}s`}</Text>
+      <ImageBackground style={appStyle.centerView} source={images.bang}>
+        <Text style={appStyle.labelText}>{`${text[0]} + ${text[1]} = ?`}</Text>
+      </ImageBackground>
+      <Text style={appStyle.label}>Your answer</Text>
       <View style={appStyle.bottomView}>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="text here"
-          keyboardType="numeric"
-          onEndEditing={() => handleClickCheckBtn()}
+        <FlatList
+          data={result}
+          scrollEnabled
+          horizontal={true}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => handleClickCheckBtn(item)}>
+              <ImageBackground source={images.answer} style={appStyle.btn}>
+                <Text style={appStyle.labelAnswer}>{item}</Text>
+              </ImageBackground>
+            </TouchableOpacity>
+          )}
         />
       </View>
       {popup && (
         <View style={appStyle.popupView}>
           <ImageBackground style={appStyle.popupImage} source={images.score}>
-            <Text style={appStyle.scoreText}>{score}</Text>
+            <Text style={appStyle.scoreText1}>{score}</Text>
             <View style={appStyle.popupBottomView}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Image source={images.home} style={appStyle.okBtn} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleClickRePlayBtn()}>
-                <Image source={images.replay} style={appStyle.okBtn} />
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -100,10 +118,11 @@ const ItemScreen = ({navigation, route}) => {
   );
 };
 
-export const handleListItem = lenght => {
-  var list = [];
-  for (let index = 0; index < lenght; index++) {
-    list.push([randomIntFromInterval(0, 50), randomIntFromInterval(0, 90)]);
+export const randomPost = list => {
+  for (let index = 0; index < list.length; index++) {
+    const element = list[index];
+    list.splice(index, 1);
+    list.splice(randomIntFromInterval(0, 3), 0, element);
   }
   return list;
 };
@@ -111,19 +130,13 @@ export const handleListItem = lenght => {
 export const randomIntFromInterval = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
-export const randomPos = (posx, posy) =>
-  StyleSheet.create({
-    position: 'absolute',
-    top: `${posx}%`,
-    left: `${posy}%`,
-  });
 export const appStyle = StyleSheet.create({
   homeView: {
     flex: 1,
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
   okBtn: {
@@ -135,7 +148,7 @@ export const appStyle = StyleSheet.create({
     width: windowWidth * 0.7,
     height: windowHeight * 0.1,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     flexDirection: 'row',
   },
   popupView: {
@@ -156,11 +169,6 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  pigImage: {
-    width: windowWidth * 0.1,
-    height: windowHeight * 0.2,
-    resizeMode: 'contain',
-  },
   input: {
     height: 60,
     backgroundColor: 'white',
@@ -169,7 +177,7 @@ export const appStyle = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
+    fontFamily: 'Fruitz Demo',
     color: 'black',
   },
   closeView: {
@@ -179,28 +187,36 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 20,
-    position: 'absolute',
-    top: '0%',
   },
   centerView: {
-    width: windowWidth,
-    height: windowHeight * 0.3,
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
   },
   labelText: {
-    fontSize: 120,
-    fontFamily: 'fengardo-neue.regular',
+    fontSize: 30,
+    fontFamily: 'Fruitz Demo',
     color: 'black',
   },
   label: {
     fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
+    fontFamily: 'Fruitz Demo',
     color: 'black',
     marginVertical: 20,
   },
+  scoreText1: {
+    fontSize: 20,
+    fontFamily: 'Fruitz Demo',
+    color: 'white',
+    position: 'absolute',
+    top: '40%',
+  },
   scoreText: {
-    fontSize: 30,
-    fontFamily: 'fengardo-neue.regular',
-    color: 'black',
+    fontSize: 20,
+    fontFamily: 'Fruitz Demo',
+    color: 'white',
   },
   btnClose: {
     width: windowWidth * 0.1,
@@ -208,13 +224,21 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   btn: {
-    width: windowWidth * 0.4,
-    height: windowHeight * 0.2,
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.2,
+    marginHorizontal: 10,
     resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelAnswer: {
+    fontSize: 20,
+    fontFamily: 'Fruitz Demo',
+    color: 'white',
   },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.15,
+    height: windowHeight * 0.4,
     alignItems: 'center',
     justifyContent: 'center',
   },
