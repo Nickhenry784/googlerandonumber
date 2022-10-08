@@ -1,4 +1,4 @@
-package com.domenicmcdermott.quickanddquickkqaq;
+package com.shermannienow.guessthenameofthegreekgodssgtof;
 
 import com.facebook.react.ReactActivity;
 

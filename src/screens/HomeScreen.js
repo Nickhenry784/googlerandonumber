@@ -14,46 +14,29 @@ import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {decrement} from '../redux/pointSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {images} from '../assets/images';
-import {iconData} from '../assets/icon';
+import {images} from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const Home = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const points = useSelector(state => state.points);
 
-  const onClickStartButton = item => {
-    if (points.value === 0) {
-      Alert.alert('Please buy more turn');
-      return false;
-    }
-    dispatch(decrement());
-    const list = handleRandomListIcon();
-    navigation.navigate('Item', {
-      data: list,
-    });
-  };
-
-  const handleRandomListIcon = () => {
-    const list = [...iconData];
-    // eslint-disable-next-line no-plusplus
-    const list1 = list.concat(list);
-    const list2 = list1.concat(list1);
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < list2.length; index++) {
-      const element = list2[index];
-      list2.splice(index, 1);
-      list2.splice(randomIntFromInterval(0, 22), 0, element);
-    }
-    return list2;
-  };
+  const dispatch = useDispatch();
 
   const onClickTurnButton = () => {
     navigation.navigate('BUY');
+  };
+
+  const onClickStartButton = () => {
+    if (points.value <= 0) {
+      Alert.alert('Please buy more turn!');
+      return false;
+    }
+    dispatch(decrement());
+    navigation.navigate('Item');
   };
 
   return (
@@ -61,23 +44,20 @@ const Home = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.heart} style={appStyle.scoreStyle} />
+            <Image source={images.thunder} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.quickandquick} style={appStyle.bullImage} />
-      <Image source={images.guideplay} style={appStyle.popupImage} />
-
-      <TouchableOpacity onPress={onClickStartButton}>
-        <Image source={images.start} style={appStyle.startBtn} />
-      </TouchableOpacity>
+      <Image source={images.name} style={appStyle.phoneImage} />
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.play} style={appStyle.itemView} />
+        </TouchableOpacity>
+      </View>
     </ImageBackground>
   );
 };
-
-export const randomIntFromInterval = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -88,17 +68,21 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
-  appBar: {
-    height: windowHeight * 0.1,
-    width: '100%',
+  squareImage: {
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.3,
     alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
-  popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.5,
-    resizeMode: 'contain',
+  labelText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#d8b58a',
+  },
+  closeView: {
+    position: 'absolute',
+    top: '0%',
+    right: '-10%',
   },
   popupView: {
     width: windowWidth,
@@ -112,63 +96,69 @@ export const appStyle = StyleSheet.create({
     right: '0%',
     bottom: '0%',
   },
+  orangeImage: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+  },
+  okBtn: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
+  appBar: {
+    height: windowHeight * 0.1,
+    paddingHorizontal: 20,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  turnView: {
+    flexDirection: 'row',
+    width: windowWidth * 0.15,
+    height: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  turnText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   buyImage: {
     width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
-  okBtn: {
-    width: windowWidth * 0.1,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
-  },
-  bottomView: {
-    flex: 0.5,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  centerView: {
-    flex: 0.4,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  turnView: {
-    width: windowWidth * 0.15,
-    marginRight: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  bullImage: {
-    width: windowWidth * 0.8,
+  brokenImage: {
+    width: windowWidth * 0.6,
     height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
-  startBtn: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.1,
+  itemView: {
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
-  scoreStyle: {
-    width: windowWidth * 0.1,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
+  text: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
   },
-  turnText: {
-    fontSize: 50,
-    color: 'blue',
-    fontFamily: 'Mat Saleh',
-    textAlign: 'center',
+  bottomView: {
+    height: windowHeight * 0.3,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: '0%',
   },
-  labelText: {
-    fontSize: 25,
-    color: 'blue',
+  phoneImage: {
     width: windowWidth * 0.8,
-    textAlign: 'center',
-    fontFamily: 'Mat Saled',
+    height: windowHeight * 0.2,
+    resizeMode: 'contain',
   },
 });
 
-export default Home;
+export default HomeScreen;
