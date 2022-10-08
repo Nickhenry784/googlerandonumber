@@ -1,4 +1,4 @@
-package com.beaulahdurgan.samuraiimysterii;
+package com.augustusdoyle.samuraiimysteriidre;
 
 import com.facebook.react.ReactActivity;
 
