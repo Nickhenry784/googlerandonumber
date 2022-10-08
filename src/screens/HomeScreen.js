@@ -49,10 +49,7 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.name} style={appStyle.phoneImage} />
-      <ImageBackground source={images.square2} style={appStyle.squareImage}>
-        <Image source={images.orange} style={appStyle.orangeImage} />
-      </ImageBackground>
+      <Image source={images.name} style={appStyle.brokenImage} />
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.play} style={appStyle.itemView} />
@@ -68,14 +65,14 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     resizeMode: 'cover',
   },
-  squareImage: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.3,
+  popupImage: {
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.15,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   labelText: {
     fontSize: 30,
@@ -84,8 +81,8 @@ export const appStyle = StyleSheet.create({
   },
   closeView: {
     position: 'absolute',
-    top: '0%',
-    right: '-10%',
+    top: '5%',
+    right: '0%',
   },
   popupView: {
     width: windowWidth,
@@ -99,18 +96,13 @@ export const appStyle = StyleSheet.create({
     right: '0%',
     bottom: '0%',
   },
-  orangeImage: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.3,
-    resizeMode: 'contain',
-  },
   okBtn: {
     width: windowWidth * 0.3,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
   appBar: {
-    height: windowHeight * 0.1,
+    flex: 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
@@ -126,7 +118,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: 'fengardo-neue.regular',
     color: 'black',
   },
   buyImage: {
@@ -135,7 +127,7 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth * 0.6,
+    width: windowWidth * 0.8,
     height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
@@ -150,15 +142,17 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   bottomView: {
-    height: windowHeight * 0.3,
+    flex: 0.3,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
   phoneImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.2,
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.7,
     resizeMode: 'contain',
+    position: 'absolute',
+    top: '0%',
   },
 });
 
