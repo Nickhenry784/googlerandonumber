@@ -44,12 +44,15 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.thunder} style={appStyle.buyImage} />
+            <Image source={images.heart} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.name} style={appStyle.phoneImage} />
+      <Image source={images.label} style={appStyle.phoneImage} />
+      <ImageBackground source={images.square1} style={appStyle.squareImage}>
+        <Image source={images.lion} style={appStyle.orangeImage} />
+      </ImageBackground>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.play} style={appStyle.itemView} />
@@ -69,8 +72,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'cover',
   },
   squareImage: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.3,
+    width: windowWidth * 0.65,
+    height: windowHeight * 0.35,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -124,7 +127,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -151,8 +154,6 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
-    bottom: '0%',
   },
   phoneImage: {
     width: windowWidth * 0.8,

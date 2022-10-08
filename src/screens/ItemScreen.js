@@ -19,17 +19,17 @@ const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.aphrodite, text: 'aphrodite'},
-  {id: 2, bg: images.apollo, text: 'apollo'},
-  {id: 3, bg: images.ares, text: 'ares'},
-  {id: 4, bg: images.artemis, text: 'artemis'},
-  {id: 5, bg: images.athena, text: 'athena'},
-  {id: 6, bg: images.demeter, text: 'demeter'},
-  {id: 7, bg: images.hades, text: 'hades'},
-  {id: 8, bg: images.hera, text: 'hera'},
-  {id: 9, bg: images.hermes, text: 'hermes'},
-  {id: 10, bg: images.poseidon, text: 'poseidon'},
-  {id: 11, bg: images.zeus, text: 'zeus'},
+  {id: 1, bg: images.bear, text: 'Bear'},
+  {id: 2, bg: images.bird, text: 'bird'},
+  {id: 3, bg: images.elephent, text: 'elephent'},
+  {id: 4, bg: images.fox, text: 'fox'},
+  {id: 5, bg: images.giraffe, text: 'firaffe'},
+  {id: 6, bg: images.lion, text: 'lion'},
+  {id: 7, bg: images.monkey, text: 'monkey'},
+  {id: 8, bg: images.panda, text: 'panda'},
+  {id: 9, bg: images.pig, text: 'pig'},
+  {id: 10, bg: images.snake, text: 'snake'},
+  {id: 11, bg: images.turtle, text: 'turtle'},
 ];
 
 const ItemScreen = ({navigation, route}) => {
@@ -44,6 +44,9 @@ const ItemScreen = ({navigation, route}) => {
       setScore(score + 10);
       onChangeText('');
       setIndex(randomIntFromInterval(0, dataBg.length - 1));
+      return () => {
+        clearTimeout(timeOut);
+      };
     }  else {
       navigation.goBack();
     }
@@ -71,10 +74,9 @@ const ItemScreen = ({navigation, route}) => {
         </TouchableOpacity>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <ImageBackground source={images.square2} style={appStyle.square2}>
+      <ImageBackground source={images.square1} style={appStyle.squareImage1}>
         <Image source={dataBg[index].bg} style={appStyle.foodImage} />
       </ImageBackground>
-
       <FlatList
         data={makeUnique(dataBg[index].text)}
         style={{marginTop: 20}}
@@ -92,9 +94,15 @@ const ItemScreen = ({navigation, route}) => {
           value={text}
           placeholder={'Text here'}
         />
-        <TouchableOpacity onPress={() => onEndChangeText()}>
-          <Image source={images.true} style={appStyle.btn} />
-        </TouchableOpacity>
+        <View style={appStyle.btnView}>
+          <TouchableOpacity onPress={() => onEndChangeText()}>
+            <Image source={images.true} style={appStyle.btn} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setIndex(randomIntFromInterval(0, dataBg.length))}>
+            <Image source={images.RETURN} style={appStyle.btn} />
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -112,10 +120,9 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
-  square2: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.4,
-    resizeMode: 'contain',
+  squareImage1: {
+    width: windowWidth * 0.65,
+    height: windowHeight * 0.35,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -127,16 +134,23 @@ export const appStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  btnView: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   squareImage: {
-    width: windowWidth * 0.08,
-    height: windowWidth * 0.08,
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
     marginHorizontal: 10,
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
   },
   textLabel: {
-    fontSize: 25,
+    fontSize: windowWidth > 600 ? 40 : 25,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -161,7 +175,7 @@ export const appStyle = StyleSheet.create({
   },
   input: {
     height: 60,
-    width: windowWidth * 0.5,
+    width: windowWidth * 0.7,
     backgroundColor: 'white',
     margin: 12,
     fontSize: 20,
@@ -194,11 +208,10 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     bottom: '0%',
-    flexDirection: 'row',
   },
   foodImage: {
     width: windowWidth * 0.4,
-    height: windowHeight * 0.3,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
   },
   backBtn: {
@@ -207,9 +220,8 @@ export const appStyle = StyleSheet.create({
     left: '3%',
   },
   scoreText: {
-    fontSize: 20,
+    fontSize: windowWidth > 600 ? 40 : 25,
     fontWeight: 'bold',
-    color: 'white',
   },
   btnBack: {
     width: windowWidth * 0.1,

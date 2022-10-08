@@ -1,70 +1,70 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.sthenameoft_1',
+    sku: 'com.malnameegam_1',
     value: 10,
   },
   {
-    sku: 'com.sthenameoft_2',
+    sku: 'com.malnameegam_2',
     value: 50,
   },
   {
-    sku: 'com.sthenameoft_3',
+    sku: 'com.malnameegam_3',
     value: 100,
   },
   {
-    sku: 'com.sthenameoft_4',
+    sku: 'com.malnameegam_4',
     value: 200,
   },
   {
-    sku: 'com.sthenameoft_5',
+    sku: 'com.malnameegam_5',
     value: 400,
   },
   {
-    sku: 'com.sthenameoft_6',
+    sku: 'com.malnameegam_6',
     value: 600,
   },
   {
-    sku: 'com.sthenameoft_7',
+    sku: 'com.malnameegam_7',
     value: 800,
   },
   {
-    sku: 'com.sthenameoft_8',
+    sku: 'com.malnameegam_8',
     value: 1000,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.sthenameoft_sub_1',
+    sku: 'com.malnameegam_sub_1',
     value: 10,
   },
   {
-    sku: 'com.sthenameoft_sub_2',
+    sku: 'com.malnameegam_sub_2',
     value: 50,
   },
   {
-    sku: 'com.sthenameoft_sub_3',
+    sku: 'com.malnameegam_sub_3',
     value: 100,
   },
   {
-    sku: 'com.sthenameoft_sub_4',
+    sku: 'com.malnameegam_sub_4',
     value: 200,
   },
   {
-    sku: 'com.sthenameoft_sub_5',
+    sku: 'com.malnameegam_sub_5',
     value: 400,
   },
   {
-    sku: 'com.sthenameoft_sub_6',
+    sku: 'com.malnameegam_sub_6',
     value: 600,
   },
   {
-    sku: 'com.sthenameoft_sub_7',
+    sku: 'com.malnameegam_sub_7',
     value: 800,
   },
   {
-    sku: 'com.sthenameoft_sub_8',
+    sku: 'com.malnameegam_sub_8',
     value: 1000,
   },
 ];
