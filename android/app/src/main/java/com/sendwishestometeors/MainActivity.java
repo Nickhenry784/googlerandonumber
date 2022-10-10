@@ -1,4 +1,4 @@
-package com.kaylahterry.guessfootballlo;
+package com.theresiadubuque.guesstrademarktu;
 
 import com.facebook.react.ReactActivity;
 
