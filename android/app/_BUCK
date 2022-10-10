@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.missaharon.guessdogiqname",
+    package = "com.bufordosinski.fuquestionpq",
 )
 
 android_resource(
     name = "res",
-    package = "com.missaharon.guessdogiqname",
+    package = "com.bufordosinski.fuquestionpq",
     res = "src/main/res",
 )
 

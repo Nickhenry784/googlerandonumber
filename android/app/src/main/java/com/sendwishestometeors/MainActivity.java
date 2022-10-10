@@ -1,4 +1,4 @@
-package com.missaharon.guessdogiqname;
+package com.bufordosinski.fuquestionpq;
 
 import com.facebook.react.ReactActivity;
 
