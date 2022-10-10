@@ -1,4 +1,4 @@
-package com.davinshields.guesscarlogoiw;
+package com.missaharon.guessdogiqname;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.davinshields.guesscarlogoiw">
+  package="com.missaharon.guessdogiqname">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -9,64 +9,88 @@ import {
   ImageBackground,
   TouchableOpacity,
   TextInput,
-  Text} from 'react-native';
+  Text,
+  FlatList,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import { images } from '../assets';
+import {images} from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 const dataBg = [
-  {id: 1, bg: images.bmw, text: 'Bmw'},
-  {id: 2, bg: images.chevrolet, text: 'Chevrolet'},
-  {id: 3, bg: images.ford, text: 'Ford'},
-  {id: 4, bg: images.honda, text: 'Honda'},
-  {id: 5, bg: images.hyundai, text: 'Hyundai'},
-  {id: 6, bg: images.lamborghini, text: 'Lamborghini'},
-  {id: 7, bg: images.lexus, text: 'Lexus'},
-  {id: 8, bg: images.mazda, text: 'Mazda'},
-  {id: 9, bg: images.mercedes, text: 'Mercedes'},
-  {id: 10, bg: images.nissan, text: 'Nissan'},
-  {id: 11, bg: images.rollsroyce, text: 'Rollsroyce'},
+  {id: 1, bg: images.bulldog, text: 'bulldog'},
+  {id: 2, bg: images.chowchow, text: 'chowchow'},
+  {id: 3, bg: images.collie, text: 'collie'},
+  {id: 4, bg: images.Corgi, text: 'corgi'},
+  {id: 5, bg: images.GoldenRetriever, text: 'GoldenRetriever'},
+  {id: 6, bg: images.LabradorRetriever, text: 'LabradorRetriever'},
+  {id: 7, bg: images.poodle, text: 'poodle'},
+  {id: 8, bg: images.pug, text: 'pug'},
+  {id: 9, bg: images.samoyed, text: 'samoyed'},
+  {id: 10, bg: images.ShibaInu, text: 'ShibaInu'},
+  {id: 11, bg: images.ShihTzu, text: 'ShihTzu'},
 ];
 
 const ItemScreen = ({navigation, route}) => {
-
-  const [index, setIndex] = useState(randomIntFromInterval(0,dataBg.length - 1));
+  const [index, setIndex] = useState(
+    randomIntFromInterval(0, dataBg.length - 1),
+  );
   const [text, onChangeText] = useState('');
   const [score, setScore] = useState(0);
 
+  const onEndChangeText = () => {
+    if (text.toLocaleLowerCase() === dataBg[index].text.toLocaleLowerCase()) {
+      setScore(score + 10);
+      onChangeText('');
+      setIndex(randomIntFromInterval(0, dataBg.length - 1));
+      return () => {
+        clearTimeout(timeOut);
+      };
+    } else {
+      navigation.goBack();
+    }
+  };
 
- const onEndChangeText = () => {
-  if (text.toLocaleLowerCase() === dataBg[index].text.toLocaleLowerCase()){
-    setScore(score + 10);
-    onChangeText('');
-    setIndex(randomIntFromInterval(0,dataBg.length - 1));
-  } else {
-    navigation.goBack();
-  }
- };
+  const makeUnique = value => {
+    var list = [];
+    for (var i = 0; i < value.length; i++) {
+      const element = value.substring(i, i + 1);
+      list.push(element);
+    }
+    for (let t = 0; t < list.length; t++) {
+      const element = list[t];
+      list.splice(t, 1);
+      list.splice(randomIntFromInterval(0, list.length), 0, element);
+    }
+    return list;
+  };
 
   return (
     <ImageBackground style={appStyle.homeView} source={images.bg1}>
-      <View style={appStyle.backBtn}>
+      <View style={appStyle.appBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={images.home} style={appStyle.btnBack} />
         </TouchableOpacity>
-      </View>
-      <View style={appStyle.scoreView}>
         <Text style={appStyle.scoreText}>{`Score: ${score}`}</Text>
       </View>
-      <ImageBackground source={images.bang} style={appStyle.bangImage}>
-        <Image source={dataBg[index].bg} style={appStyle.foodImage} />
-      </ImageBackground>
+      <Image source={dataBg[index].bg} style={appStyle.foodImage} />
+      <FlatList
+        data={makeUnique(dataBg[index].text)}
+        style={{marginTop: 20}}
+        horizontal={true}
+        renderItem={({item}) => (
+          <ImageBackground source={images.square2} style={appStyle.squareImage}>
+            <Text style={appStyle.textLabel}>{item.toUpperCase()}</Text>
+          </ImageBackground>
+        )}
+      />
       <View style={appStyle.bottomView}>
         <TextInput
           style={appStyle.input}
           onChangeText={onChangeText}
           value={text}
           placeholder={'Text here'}
-          onEndEditing={() => onEndChangeText()}
         />
         <TouchableOpacity onPress={() => onEndChangeText()}>
           <Image source={images.check} style={appStyle.btn} />
@@ -85,8 +109,29 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
+  },
+  appBar: {
+    height: windowHeight * 0.1,
+    paddingHorizontal: 20,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  squareImage: {
+    width: windowWidth * 0.08,
+    height: windowWidth * 0.08,
+    marginHorizontal: 10,
+    resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textLabel: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'black',
   },
   bangImage: {
     width: windowWidth * 0.8,
@@ -94,6 +139,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'red',
   },
   btn: {
     width: windowWidth * 0.3,
@@ -107,10 +154,11 @@ export const appStyle = StyleSheet.create({
   },
   input: {
     height: 60,
-    width: windowWidth * 0.7,
+    width: windowWidth * 0.5,
     backgroundColor: 'white',
     margin: 12,
     fontSize: 20,
+    textAlign: 'center',
     padding: 10,
   },
   boardImage: {
@@ -126,9 +174,11 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     top: '30%',
     left: '10%',
-    transform: [{
-      rotate: '-20deg',
-    }],
+    transform: [
+      {
+        rotate: '-20deg',
+      },
+    ],
   },
   bottomView: {
     width: windowWidth,
@@ -137,10 +187,11 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     bottom: '0%',
+    flexDirection: 'row',
   },
   foodImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.5,
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.4,
     resizeMode: 'contain',
   },
   backBtn: {
@@ -149,9 +200,8 @@ export const appStyle = StyleSheet.create({
     left: '3%',
   },
   scoreText: {
-    fontSize: windowWidth > 600 ? 50 : 30,
+    fontSize: windowWidth > 600 ? 40 : 25,
     fontWeight: 'bold',
-    color: 'white',
   },
   btnBack: {
     width: windowWidth * 0.1,
