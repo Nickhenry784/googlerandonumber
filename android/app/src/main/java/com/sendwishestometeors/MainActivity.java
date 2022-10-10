@@ -1,4 +1,4 @@
-package com.lavernhilpert.clockwatchke;
+package com.zorahackett.loveratioko;
 
 import com.facebook.react.ReactActivity;
 

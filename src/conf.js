@@ -1,70 +1,38 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.ockwatc_1',
-    value: 10,
-  },
-  {
-    sku: 'com.ockwatc_2',
-    value: 50,
-  },
-  {
-    sku: 'com.ockwatc_3',
+    sku: 'com.amazon.overati_100',
     value: 100,
   },
   {
-    sku: 'com.ockwatc_4',
+    sku: 'com.amazon.overati_200',
     value: 200,
   },
   {
-    sku: 'com.ockwatc_5',
+    sku: 'com.amazon.overati_300',
+    value: 300,
+  },
+  {
+    sku: 'com.amazon.overati_400',
     value: 400,
-  },
-  {
-    sku: 'com.ockwatc_6',
-    value: 600,
-  },
-  {
-    sku: 'com.ockwatc_7',
-    value: 800,
-  },
-  {
-    sku: 'com.ockwatc_8',
-    value: 1000,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.ockwatc_sub_1',
-    value: 10,
-  },
-  {
-    sku: 'com.ockwatc_sub_2',
-    value: 50,
-  },
-  {
-    sku: 'com.ockwatc_sub_3',
+    sku: 'com.amazon.weekly_overati_1',
     value: 100,
   },
   {
-    sku: 'com.ockwatc_sub_4',
+    sku: 'com.amazon.weekly_overati_2',
     value: 200,
   },
   {
-    sku: 'com.ockwatc_sub_5',
+    sku: 'com.amazon.monthly_overati_1',
     value: 400,
   },
   {
-    sku: 'com.ockwatc_sub_6',
-    value: 600,
-  },
-  {
-    sku: 'com.ockwatc_sub_7',
-    value: 800,
-  },
-  {
-    sku: 'com.ockwatc_sub_8',
-    value: 1000,
+    sku: 'com.amazon.monthly_overati_2',
+    value: 700,
   },
 ];

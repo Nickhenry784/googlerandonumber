@@ -31,27 +31,26 @@ const HomeScreen = () => {
   };
 
   const onClickStartButton = () => {
-    // if(points.value <= 0){
-    //   Alert.alert("Please buy more turn!");
-    //   return false;
-    // }
-    // dispatch(decrement());
+    if (points.value <= 0) {
+      Alert.alert('Please buy more turn!');
+      return false;
+    }
+    dispatch(decrement());
     navigation.navigate('Item');
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
+    <ImageBackground style={appStyle.homeView} source={images.bgst}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
-          <View style={appStyle.turnView}>
-            <Image source={images.turn} style={appStyle.buyImage} />
+          <ImageBackground source={images.turn} style={appStyle.buyImage}>
             <Text style={appStyle.turnText}>{points.value}</Text>
-          </View>
+          </ImageBackground>
         </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.btbamgio} style={appStyle.itemView} />
+          <Image source={images.watch} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -73,7 +72,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   turnView: {
     flexDirection: 'row',
@@ -83,29 +82,26 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: 30,
-    fontFamily: 'alarm clock',
-    color: '#08fcfc',
+    fontSize: windowWidth > 600 ? 50 : 30,
+    fontFamily: 'House Party',
+    color: 'white',
   },
   buyImage: {
-    width: windowWidth * 0.1,
+    width: windowWidth * 0.12,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   brokenImage: {
-    width: windowWidth * 0.4,
+    width: windowWidth * 0.6,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   itemView: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
-  },
-  text: {
-    fontSize: windowWidth > 640 ? 30 : 25,
-    fontWeight: 'bold',
-    color: 'white',
   },
   bottomView: {
     flex: 0.3,
