@@ -1,4 +1,4 @@
-package com.zorahackett.loveratioko;
+package com.kaylahterry.guessfootballlo;
 
 import com.facebook.react.ReactActivity;
 

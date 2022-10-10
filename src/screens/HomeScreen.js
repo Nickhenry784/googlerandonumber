@@ -40,17 +40,18 @@ const HomeScreen = () => {
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bgst}>
+    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
-          <ImageBackground source={images.turn} style={appStyle.buyImage}>
+          <View style={appStyle.turnView}>
+            <Image source={images.turn} style={appStyle.buyImage} />
             <Text style={appStyle.turnText}>{points.value}</Text>
-          </ImageBackground>
+          </View>
         </TouchableOpacity>
       </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watch} style={appStyle.itemView} />
+          <Image source={images.start} style={appStyle.itemView} />
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -63,16 +64,51 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     resizeMode: 'cover',
   },
+  popupImage: {
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  labelText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#d8b58a',
+  },
+  closeView: {
+    position: 'absolute',
+    top: '0%',
+    right: '-10%',
+  },
+  popupView: {
+    width: windowWidth,
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(1, 1, 1, 0.7)',
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+  },
+  okBtn: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
   appBar: {
-    flex: 0.1,
+    height: windowHeight * 0.1,
     paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    top: '0%',
   },
   turnView: {
     flexDirection: 'row',
@@ -82,20 +118,18 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
   },
   turnText: {
-    fontSize: windowWidth > 600 ? 50 : 30,
-    fontFamily: 'House Party',
+    fontSize: windowWidth > 640 ? 30 : 25,
+    fontWeight: 'bold',
     color: 'white',
   },
   buyImage: {
-    width: windowWidth * 0.12,
+    width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   brokenImage: {
     width: windowWidth * 0.6,
-    height: windowWidth * 0.2,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   itemView: {
@@ -103,11 +137,18 @@ export const appStyle = StyleSheet.create({
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
+  text: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   bottomView: {
-    flex: 0.3,
+    height: windowHeight * 0.3,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+    bottom: '0%',
   },
   phoneImage: {
     width: windowWidth * 0.5,
