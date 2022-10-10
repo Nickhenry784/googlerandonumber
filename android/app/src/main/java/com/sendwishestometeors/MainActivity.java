@@ -1,4 +1,4 @@
-package com.gretchenschmeler.questionenvironmentalprotectionqv;
+package com.lavernhilpert.clockwatchke;
 
 import com.facebook.react.ReactActivity;
 
