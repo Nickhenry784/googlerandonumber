@@ -1,4 +1,4 @@
-package com.sigmundgoldner.questionfireprotectionnfpf;
+package com.gretchenschmeler.questionenvironmentalprotectionqv;
 
 import com.facebook.react.ReactActivity;
 

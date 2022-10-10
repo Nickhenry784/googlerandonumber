@@ -50,11 +50,9 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
       <Image source={images.name} style={appStyle.phoneImage} />
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.play} style={appStyle.itemView} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => onClickStartButton()}>
+        <Image source={images.play} style={appStyle.itemView} />
+      </TouchableOpacity>
     </ImageBackground>
   );
 };
@@ -65,7 +63,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
   squareImage: {
@@ -108,10 +106,11 @@ export const appStyle = StyleSheet.create({
   },
   appBar: {
     height: windowHeight * 0.1,
-    width: windowWidth * 0.9,
-    position: 'absolute',
-    top: '0%',
-    left: '5%',
+    paddingHorizontal: 20,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   turnView: {
     flexDirection: 'row',
