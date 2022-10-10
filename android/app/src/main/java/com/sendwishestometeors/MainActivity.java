@@ -1,4 +1,4 @@
-package com.sterlingreichel.truthdareoq;
+package com.davinshields.guesscarlogoiw;
 
 import com.facebook.react.ReactActivity;
 
