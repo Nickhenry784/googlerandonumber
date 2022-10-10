@@ -1,4 +1,4 @@
-package com.theresiadubuque.guesstrademarktu;
+package com.sterlingreichel.truthdareoq;
 
 import com.facebook.react.ReactActivity;
 
