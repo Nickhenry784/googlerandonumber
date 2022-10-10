@@ -49,10 +49,12 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => onClickStartButton()}>
-        <Image source={images.play} style={appStyle.itemView} />
-      </TouchableOpacity>
-      <Image source={images.name} style={appStyle.brokenImage} />
+      <Image source={images.name} style={appStyle.phoneImage} />
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickStartButton()}>
+          <Image source={images.play} style={appStyle.itemView} />
+        </TouchableOpacity>
+      </View>
     </ImageBackground>
   );
 };
@@ -63,14 +65,14 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     resizeMode: 'cover',
   },
-  popupImage: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.15,
+  squareImage: {
+    width: windowWidth * 0.6,
+    height: windowHeight * 0.3,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   labelText: {
     fontSize: 30,
@@ -79,8 +81,8 @@ export const appStyle = StyleSheet.create({
   },
   closeView: {
     position: 'absolute',
-    top: '5%',
-    right: '0%',
+    top: '0%',
+    right: '-10%',
   },
   popupView: {
     width: windowWidth,
@@ -94,6 +96,11 @@ export const appStyle = StyleSheet.create({
     right: '0%',
     bottom: '0%',
   },
+  orangeImage: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.3,
+    resizeMode: 'contain',
+  },
   okBtn: {
     width: windowWidth * 0.3,
     height: windowWidth * 0.1,
@@ -101,11 +108,10 @@ export const appStyle = StyleSheet.create({
   },
   appBar: {
     height: windowHeight * 0.1,
-    paddingHorizontal: 20,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: windowWidth * 0.9,
+    position: 'absolute',
+    top: '0%',
+    left: '5%',
   },
   turnView: {
     flexDirection: 'row',
@@ -116,7 +122,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'Fruitz Demo',
+    fontFamily: 'Write Nice',
     color: 'black',
   },
   buyImage: {
@@ -125,8 +131,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   brokenImage: {
-    width: windowWidth,
-    height: windowHeight * 0.5,
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.3,
     resizeMode: 'contain',
   },
   itemView: {
@@ -140,17 +146,17 @@ export const appStyle = StyleSheet.create({
     color: 'white',
   },
   bottomView: {
-    flex: 0.3,
+    height: windowHeight * 0.3,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+    bottom: '0%',
   },
   phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.2,
     resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
   },
 });
 

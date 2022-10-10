@@ -1,4 +1,4 @@
-package com.ednaabshire.fasthandsorfastbrainsfhfb;
+package com.sigmundgoldner.questionfireprotectionnfpf;
 
 import com.facebook.react.ReactActivity;
 
