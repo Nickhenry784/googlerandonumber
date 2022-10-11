@@ -1,4 +1,4 @@
-package com.hazeltromp.wedcardond;
+package com.shanyfreenfelder.animalvoicemc;
 
 import com.facebook.react.ReactActivity;
 
