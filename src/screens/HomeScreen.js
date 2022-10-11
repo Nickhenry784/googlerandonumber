@@ -9,6 +9,7 @@ import {
   Image,
   FlatList,
   Alert,
+  TextInput,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -24,6 +25,11 @@ const HomeScreen = () => {
 
   const points = useSelector(state => state.points);
 
+  const [male, setMale] = useState('');
+  const [female, setFemale] = useState('');
+  const [address, setAddress] = useState('');
+  const [date, setDate] = useState('');
+
   const dispatch = useDispatch();
 
   const onClickTurnButton = () => {
@@ -35,12 +41,21 @@ const HomeScreen = () => {
       Alert.alert('Please buy more turn!');
       return false;
     }
+    if (male === '' || female === '' || address === '' || date === '') {
+      Alert.alert('Please input your information!');
+      return false;
+    }
     dispatch(decrement());
-    navigation.navigate('Item');
+    navigation.navigate('Item', {
+      male: male,
+      female: female,
+      address: address,
+      date: date,
+    });
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
+    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -49,7 +64,27 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <Image source={images.name} style={appStyle.phoneImage} />
+      <View style={{position: 'absolute', top: '5%'}}>
+        <Image source={images.textstart} style={appStyle.brokenImage} />
+      </View>
+      <View style={{position: 'absolute', top: '15%'}}>
+        <Text style={appStyle.labelText}>Male</Text>
+        <TextInput style={appStyle.input} onChangeText={setMale} value={male} />
+        <Text style={appStyle.labelText}>Female</Text>
+        <TextInput
+          style={appStyle.input}
+          onChangeText={setFemale}
+          value={female}
+        />
+        <Text style={appStyle.labelText}>Address</Text>
+        <TextInput
+          style={appStyle.input}
+          onChangeText={setAddress}
+          value={address}
+        />
+        <Text style={appStyle.labelText}>Date</Text>
+        <TextInput style={appStyle.input} onChangeText={setDate} value={date} />
+      </View>
       <View style={appStyle.bottomView}>
         <TouchableOpacity onPress={() => onClickStartButton()}>
           <Image source={images.Start} style={appStyle.itemView} />
@@ -65,46 +100,17 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     resizeMode: 'cover',
   },
-  squareImage: {
+  input: {
+    height: 50,
     width: windowWidth * 0.6,
-    height: windowHeight * 0.3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  labelText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#d8b58a',
-  },
-  closeView: {
-    position: 'absolute',
-    top: '0%',
-    right: '-10%',
-  },
-  popupView: {
-    width: windowWidth,
-    height: windowHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(1, 1, 1, 0.7)',
-    position: 'absolute',
-    top: '0%',
-    left: '0%',
-    right: '0%',
-    bottom: '0%',
-  },
-  orangeImage: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.3,
-    resizeMode: 'contain',
-  },
-  okBtn: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: 'white',
+    fontSize: 20,
   },
   appBar: {
     height: windowHeight * 0.1,
@@ -112,7 +118,7 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   turnView: {
     flexDirection: 'row',
@@ -123,7 +129,7 @@ export const appStyle = StyleSheet.create({
   },
   turnText: {
     fontSize: 30,
-    fontFamily: 'Write Nice',
+    fontFamily: 'Belligo',
     color: 'black',
   },
   buyImage: {
@@ -133,7 +139,7 @@ export const appStyle = StyleSheet.create({
   },
   brokenImage: {
     width: windowWidth * 0.6,
-    height: windowWidth * 0.3,
+    height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
   itemView: {
@@ -141,23 +147,23 @@ export const appStyle = StyleSheet.create({
     height: windowWidth * 0.2,
     resizeMode: 'contain',
   },
-  text: {
+  labelText: {
     fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
+    fontFamily: 'Belligo',
+    color: 'black',
   },
   bottomView: {
-    height: windowHeight * 0.3,
+    height: windowHeight * 0.2,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
-    bottom: '0%',
   },
   phoneImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.2,
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.7,
     resizeMode: 'contain',
+    position: 'absolute',
+    top: '0%',
   },
 });
 

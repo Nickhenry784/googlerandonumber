@@ -1,4 +1,4 @@
-package com.bufordosinski.fuquestionpq;
+package com.hazeltromp.wedcardond;
 
 import com.facebook.react.ReactActivity;
 

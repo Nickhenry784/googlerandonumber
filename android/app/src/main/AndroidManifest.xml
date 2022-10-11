@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.bufordosinski.fuquestionpq">
+  package="com.hazeltromp.wedcardond">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
