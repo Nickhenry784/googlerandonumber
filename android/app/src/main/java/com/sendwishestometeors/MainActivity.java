@@ -1,4 +1,4 @@
-package com.rhiannawuckert.bircardiz;
+package com.melvinroob.vicardlq;
 
 import com.facebook.react.ReactActivity;
 
