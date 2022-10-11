@@ -1,4 +1,4 @@
-package com.madisonheaney.buildingpcappca;
+package com.anselledner.shortstorycsm;
 
 import com.facebook.react.ReactActivity;
 

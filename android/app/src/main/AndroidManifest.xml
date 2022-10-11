@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.madisonheaney.buildingpcappca">
+  package="com.anselledner.shortstorycsm">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

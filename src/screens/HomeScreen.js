@@ -19,12 +19,40 @@ import {images} from '../assets';
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+const dataBook = [
+  {id: 1, image: images.aBalloonOnTheTall, bg: [images.aBalloonOnTheTallBg]},
+  {id: 2, image: images.neverTellALie, bg: [images.neverTellALieBg]},
+  {
+    id: 3,
+    image: images.theCatAndTheOldRat,
+    bg: [images.theCatAndTheOldRatBg, images.theCatAndTheOldRatBg2],
+  },
+  {
+    id: 4,
+    image: images.theCrowAndThePitcher,
+    bg: [images.theCrowAndThePitcherBg],
+  },
+  {
+    id: 5,
+    image: images.theHorseHunterAndStag,
+    bg: [images.theHorseHunterAndStagBg, images.theHorseHunterAndStagBg2],
+  },
+  {
+    id: 6,
+    image: images.thePerfectHeart,
+    bg: [
+      images.thePerfectHeartBg,
+      images.thePerfectHeartBg2,
+      images.thePerfectHeartBg3,
+      images.thePerfectHeartBg4,
+    ],
+  },
+];
+
 const HomeScreen = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
-
-  const [popup, setPopup] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -32,17 +60,17 @@ const HomeScreen = () => {
     navigation.navigate('BUY');
   };
 
-  const onClickStartButton = () => {
+  const onClickStartButton = item => {
     if (points.value <= 0) {
       Alert.alert('Please buy more turn!');
       return false;
     }
     dispatch(decrement());
-    navigation.navigate('Item');
+    navigation.navigate('Item', {background: item});
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.background}>
+    <ImageBackground style={appStyle.homeView} source={images.bgstart}>
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
@@ -50,25 +78,21 @@ const HomeScreen = () => {
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setPopup(true)}>
-          <Image source={images.buttonnote} style={appStyle.buyImage} />
-        </TouchableOpacity>
       </View>
-      <Image source={images.buidingpc} style={appStyle.brokenImage} />
+      <Image source={images.shortstory} style={appStyle.itemView} />
       <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.watchnow} style={appStyle.itemView} />
-        </TouchableOpacity>
-      </View>
-      {popup && (
-        <View style={appStyle.popupView}>
-          <ImageBackground style={appStyle.popupImage} source={images.bangnote}>
-            <TouchableOpacity onPress={() => setPopup(false)}>
-              <Image source={images.buttonok} style={appStyle.okBtn} />
+        <FlatList
+          data={dataBook}
+          scrollEnabled={false}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              key={item.id}
+              onPress={() => onClickStartButton(item.bg)}>
+              <Image source={item.image} style={appStyle.itemView} />
             </TouchableOpacity>
-          </ImageBackground>
-        </View>
-      )}
+          )}
+        />
+      </View>
     </ImageBackground>
   );
 };
@@ -81,29 +105,6 @@ export const appStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     resizeMode: 'cover',
-  },
-  popupImage: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.2,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  popupView: {
-    width: windowWidth,
-    height: windowHeight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(1, 1, 1, 0.7)',
-    position: 'absolute',
-    top: '0%',
-    left: '0%',
-    right: '0%',
-    bottom: '0%',
-  },
-  okBtn: {
-    width: windowWidth * 0.3,
-    height: windowWidth * 0.1,
-    resizeMode: 'contain',
   },
   appBar: {
     flex: 0.1,
@@ -130,33 +131,21 @@ export const appStyle = StyleSheet.create({
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
-  brokenImage: {
-    width: windowWidth * 0.6,
-    height: windowWidth * 0.3,
-    resizeMode: 'contain',
-  },
   itemView: {
-    width: windowWidth * 0.4,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.18,
     resizeMode: 'contain',
   },
   text: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
   bottomView: {
-    flex: 0.3,
+    flex: 0.8,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
-    resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
   },
 });
 
