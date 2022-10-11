@@ -1,4 +1,4 @@
-package com.maybellrippin.cookvietnamesevs;
+package com.madisonheaney.buildingpcappca;
 
 import com.facebook.react.ReactActivity;
 

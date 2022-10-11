@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import {
   StyleSheet,
-  TouchableOpacity,
+  View,
   Dimensions,
   ScrollView,
   Image,
-  ImageBackground,
   Alert,
-  View,
+  ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {images} from '../assets';
@@ -15,12 +15,24 @@ import {images} from '../assets';
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
+const dataBg = [
+  {id: 1, bg: images.img1},
+  {id: 2, bg: images.img2},
+  {id: 3, bg: images.img3},
+  {id: 4, bg: images.img4},
+  {id: 5, bg: images.img5},
+  {id: 6, bg: images.img6},
+  {id: 7, bg: images.img7},
+  {id: 8, bg: images.img8},
+  {id: 9, bg: images.img9},
+  {id: 10, bg: images.img10},
+];
+
 const ItemScreen = ({navigation, route}) => {
-  const {background} = route.params;
   const [index, setIndex] = useState(0);
 
   const onClickNextBtn = () => {
-    if (index !== background.length - 1) {
+    if (index !== 9) {
       setIndex(index + 1);
     }
   };
@@ -28,47 +40,33 @@ const ItemScreen = ({navigation, route}) => {
   const onClickBackBtn = () => {
     if (index !== 0) {
       setIndex(index - 1);
+    } else {
+      navigation.goBack();
     }
   };
 
   return (
-    <ScrollView>
-      <ImageBackground source={background[index]} style={appStyle.scrollStyle}>
-        <View style={appStyle.bottomView}>
-          <TouchableOpacity onPress={() => onClickBackBtn()}>
-            <Image source={images.back} style={appStyle.btn} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image source={images.home} style={appStyle.btn} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => onClickNextBtn()}>
-            <Image source={images.next} style={appStyle.btn} />
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
+    <ScrollView contentContainerStyle={appStyle.homeView}>
+      <ImageBackground style={{width: windowWidth * 0.9, height: windowHeight * 0.9, resizeMode: 'contain'}} source={dataBg[index].bg} />
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={() => onClickBackBtn()}>
+          <Image source={images.back} style={appStyle.btn} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => onClickNextBtn()}>
+          <Image source={images.next} style={appStyle.btn} />
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
 
 export const appStyle = StyleSheet.create({
   homeView: {
-    flex: 1,
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    resizeMode: 'cover',
-  },
-  scrollStyle: {
-    width: windowWidth,
-    height: windowHeight * 1.2,
-    resizeMode: 'contain',
     justifyContent: 'flex-end',
-  },
-  startBtn: {
-    width: windowWidth * 0.3,
-    height: windowHeight * 0.1,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   btn: {
     width: windowWidth * 0.3,
@@ -76,6 +74,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   bottomView: {
+    position: 'absolute',
+    top: '10%',
     width: windowWidth,
     height: windowHeight * 0.2,
     alignItems: 'center',
