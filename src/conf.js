@@ -1,38 +1,70 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.amazon.rimohr_100',
+    sku: 'com.overati_1',
+    value: 10,
+  },
+  {
+    sku: 'com.overati_2',
+    value: 50,
+  },
+  {
+    sku: 'com.overati_3',
     value: 100,
   },
   {
-    sku: 'com.amazon.rimohr_200',
+    sku: 'com.overati_4',
     value: 200,
   },
   {
-    sku: 'com.amazon.rimohr_300',
-    value: 300,
+    sku: 'com.overati_5',
+    value: 400,
   },
   {
-    sku: 'com.amazon.rimohr_400',
-    value: 400,
+    sku: 'com.overati_6',
+    value: 600,
+  },
+  {
+    sku: 'com.overati_7',
+    value: 800,
+  },
+  {
+    sku: 'com.overati_8',
+    value: 1000,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_rimohr_1',
+    sku: 'com.overati_sub_1',
+    value: 10,
+  },
+  {
+    sku: 'com.overati_sub_2',
+    value: 50,
+  },
+  {
+    sku: 'com.overati_sub_3',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_rimohr_2',
+    sku: 'com.overati_sub_4',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_rimohr_1',
+    sku: 'com.overati_sub_5',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_rimohr_2',
-    value: 700,
+    sku: 'com.overati_sub_6',
+    value: 600,
+  },
+  {
+    sku: 'com.overati_sub_7',
+    value: 800,
+  },
+  {
+    sku: 'com.overati_sub_8',
+    value: 1000,
   },
 ];
