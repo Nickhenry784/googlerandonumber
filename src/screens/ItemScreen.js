@@ -1,41 +1,75 @@
 /* eslint-disable prettier/prettier */
 import {
   StyleSheet,
-  View,
+  TouchableOpacity,
   Dimensions,
   ScrollView,
   Image,
-  Alert,
   ImageBackground,
-  TouchableOpacity,
-  Text,
+  Alert,
+  View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {images} from '../assets';
-import {posData} from '../assets/pos';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.card1},
-  {id: 2, bg: images.card2},
-  {id: 3, bg: images.card3},
-  {id: 4, bg: images.card4},
-  {id: 5, bg: images.card5},
+const dataButton = [
+  {
+    id: 1,
+    image: images.a1,
+    background: [
+      images.bga1,
+      images.bga2,
+      images.bga3,
+      images.bga4,
+      images.bga5,
+      images.bga6,
+    ],
+  },
+  {
+    id: 2,
+    image: images.a2,
+    background: [
+      images.bga7,
+      images.bga8,
+      images.bga9,
+      images.bga10,
+      images.bga11,
+      images.bga12,
+    ],
+  },
+  {
+    id: 3,
+    image: images.a3,
+    background: [
+      images.bga13,
+      images.bga14,
+      images.bga15,
+      images.bga16,
+      images.bga17,
+    ],
+  },
+  {
+    id: 4,
+    image: images.a4,
+    background: [
+      images.bga18,
+      images.bga19,
+      images.bga20,
+      images.bga21,
+      images.bga22,
+    ],
+  },
 ];
 
 const ItemScreen = ({navigation, route}) => {
-  const {company} = route.params;
-  const {address} = route.params;
-  const {web} = route.params;
-  const {email} = route.params;
-  const {phone} = route.params;
-
+  const {background} = route.params;
   const [index, setIndex] = useState(0);
 
   const onClickNextBtn = () => {
-    if (index !== 4) {
+    if (index !== background.length - 1) {
       setIndex(index + 1);
     }
   };
@@ -43,86 +77,26 @@ const ItemScreen = ({navigation, route}) => {
   const onClickBackBtn = () => {
     if (index !== 0) {
       setIndex(index - 1);
+    } else {
+      navigation.goBack();
     }
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
-      <View style={{position: 'absolute', top: '0%', left: '2%'}}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.home} style={appStyle.back} />
-        </TouchableOpacity>
-      </View>
-      <ImageBackground source={dataBg[index].bg} style={appStyle.backg}>
-        <Text
-          style={textLabel(
-            posData[index][0].x,
-            posData[index][0].y,
-            posData[index][0].size,
-            posData[index][index].color,
-          )}>
-          {company}
-        </Text>
-        <Text
-          style={textLabel(
-            posData[index][1].x,
-            posData[index][1].y,
-            posData[index][1].size,
-            posData[index][1].color,
-          )}>
-          {email}
-        </Text>
-        <Text
-          style={textLabel(
-            posData[index][2].x,
-            posData[index][2].y,
-            posData[index][2].size,
-            posData[index][2].color,
-          )}>
-          {phone}
-        </Text>
-        {index !== 4 && (
-          <Text
-            style={textLabel(
-              posData[index][3].x,
-              posData[index][3].y,
-              posData[index][3].size,
-              posData[index][3].color,
-            )}>
-            {address}
-          </Text>
-        )}
-        <Text
-          style={textLabel(
-            posData[index][4].x,
-            posData[index][4].y,
-            posData[index][4].size,
-            posData[index][4].color,
-          )}>
-          {web}
-        </Text>
+    <ScrollView>
+      <ImageBackground source={background[index]} style={appStyle.scrollStyle}>
+        <View style={appStyle.backView}>
+          <TouchableOpacity onPress={() => onClickBackBtn()}>
+            <Image source={images.back} style={appStyle.startBtn} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => onClickNextBtn()}>
+            <Image source={images.next} style={appStyle.startBtn} />
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+    </ScrollView>
   );
 };
-
-export const textLabel = (x, y, font, color) =>
-  StyleSheet.create({
-    fontSize: font,
-    fontWeight: 'bold',
-    color: color,
-    position: 'absolute',
-    top: `${x}%`,
-    left: `${y}%`,
-  });
 
 export const appStyle = StyleSheet.create({
   homeView: {
@@ -130,43 +104,40 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
-  backg: {
+  scrollStyle: {
     width: windowWidth,
-    height: windowHeight * 0.3,
+    height: windowHeight * 1.2,
     resizeMode: 'contain',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  labelText: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: '#d3a869',
-  },
-  labelText1: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#d3a869',
+  startBtn: {
+    width: windowWidth * 0.1,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
   },
   btn: {
     width: windowWidth * 0.3,
     height: windowHeight * 0.1,
     resizeMode: 'contain',
   },
+  backView: {
+    position: 'absolute',
+    width: '100%',
+    paddingHorizontal: 20,
+    bottom: '0%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.1,
+    height: windowHeight * 0.2,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: '0%',
-  },
-  back: {
-    width: windowWidth * 0.1,
-    height: windowHeight * 0.1,
-    resizeMode: 'contain',
   },
 });
 

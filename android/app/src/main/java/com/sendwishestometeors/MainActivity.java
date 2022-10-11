@@ -1,4 +1,4 @@
-package com.melvinroob.vicardlq;
+package com.missourimohr.cokcakemk;
 
 import com.facebook.react.ReactActivity;
 
