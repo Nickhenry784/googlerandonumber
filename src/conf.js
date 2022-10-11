@@ -1,38 +1,70 @@
 /* eslint-disable prettier/prettier */
 export const items = [
   {
-    sku: 'com.amazon.rimohr_100',
+    sku: 'com.nesisromagu_1',
+    value: 10,
+  },
+  {
+    sku: 'com.nesisromagu_2',
+    value: 50,
+  },
+  {
+    sku: 'com.nesisromagu_3',
     value: 100,
   },
   {
-    sku: 'com.amazon.rimohr_200',
+    sku: 'com.nesisromagu_4',
     value: 200,
   },
   {
-    sku: 'com.amazon.rimohr_300',
-    value: 300,
+    sku: 'com.nesisromagu_5',
+    value: 400,
   },
   {
-    sku: 'com.amazon.rimohr_400',
-    value: 400,
+    sku: 'com.nesisromagu_6',
+    value: 600,
+  },
+  {
+    sku: 'com.nesisromagu_7',
+    value: 800,
+  },
+  {
+    sku: 'com.nesisromagu_8',
+    value: 1000,
   },
 ];
 
 export const subs = [
   {
-    sku: 'com.amazon.weekly_rimohr_1',
+    sku: 'com.nesisromagu_sub_1',
+    value: 10,
+  },
+  {
+    sku: 'com.nesisromagu_sub_2',
+    value: 50,
+  },
+  {
+    sku: 'com.nesisromagu_sub_3',
     value: 100,
   },
   {
-    sku: 'com.amazon.weekly_rimohr_2',
+    sku: 'com.nesisromagu_sub_4',
     value: 200,
   },
   {
-    sku: 'com.amazon.monthly_rimohr_1',
+    sku: 'com.nesisromagu_sub_5',
     value: 400,
   },
   {
-    sku: 'com.amazon.monthly_rimohr_2',
-    value: 700,
+    sku: 'com.nesisromagu_sub_6',
+    value: 600,
+  },
+  {
+    sku: 'com.nesisromagu_sub_7',
+    value: 800,
+  },
+  {
+    sku: 'com.nesisromagu_sub_8',
+    value: 1000,
   },
 ];
