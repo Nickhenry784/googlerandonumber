@@ -26,7 +26,6 @@ const HomeScreen = () => {
   const points = useSelector(state => state.points);
 
   const [male, setMale] = useState('');
-  const [female, setFemale] = useState('');
   const [address, setAddress] = useState('');
   const [date, setDate] = useState('');
 
@@ -41,14 +40,13 @@ const HomeScreen = () => {
       Alert.alert('Please buy more turn!');
       return false;
     }
-    if (male === '' || female === '' || address === '' || date === '') {
+    if (male === '' || address === '' || date === '') {
       Alert.alert('Please input your information!');
       return false;
     }
     dispatch(decrement());
     navigation.navigate('Item', {
       male: male,
-      female: female,
       address: address,
       date: date,
     });
@@ -64,18 +62,12 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{position: 'absolute', top: '5%'}}>
+      <View style={{position: 'absolute', top: windowWidth > 600 ? '15%' : '20%'}}>
         <Image source={images.textstart} style={appStyle.brokenImage} />
       </View>
-      <View style={{position: 'absolute', top: '15%'}}>
-        <Text style={appStyle.labelText}>Male</Text>
+      <View style={{position: 'absolute', top: '30%'}}>
+        <Text style={appStyle.labelText}>Name</Text>
         <TextInput style={appStyle.input} onChangeText={setMale} value={male} />
-        <Text style={appStyle.labelText}>Female</Text>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={setFemale}
-          value={female}
-        />
         <Text style={appStyle.labelText}>Address</Text>
         <TextInput
           style={appStyle.input}
@@ -104,13 +96,13 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'cover',
   },
   input: {
-    height: 50,
+    height: windowWidth > 600 ? 100 : 50,
     width: windowWidth * 0.6,
     margin: 12,
     borderWidth: 1,
     padding: 10,
     backgroundColor: 'white',
-    fontSize: 20,
+    fontSize: windowWidth > 600 ? 40 : 20,
   },
   appBar: {
     height: windowHeight * 0.1,
@@ -130,7 +122,7 @@ export const appStyle = StyleSheet.create({
   turnText: {
     fontSize: 30,
     fontFamily: 'Belligo',
-    color: 'black',
+    color: 'white',
   },
   buyImage: {
     width: windowWidth * 0.1,
