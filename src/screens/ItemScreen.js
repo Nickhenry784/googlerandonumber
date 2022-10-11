@@ -1,14 +1,13 @@
 /* eslint-disable prettier/prettier */
 import {
   StyleSheet,
-  View,
+  TouchableOpacity,
   Dimensions,
   ScrollView,
   Image,
-  Alert,
   ImageBackground,
-  TouchableOpacity,
-  Text,
+  Alert,
+  View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {images} from '../assets';
@@ -16,24 +15,12 @@ import {images} from '../assets';
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
-const dataBg = [
-  {id: 1, bg: images.card1},
-  {id: 2, bg: images.card2},
-  {id: 3, bg: images.card3},
-  {id: 4, bg: images.card4},
-  {id: 5, bg: images.card5},
-];
-
 const ItemScreen = ({navigation, route}) => {
-  const {male} = route.params;
-  const {female} = route.params;
-  const {address} = route.params;
-  const {date} = route.params;
-
+  const {background} = route.params;
   const [index, setIndex] = useState(0);
 
   const onClickNextBtn = () => {
-    if (index < 4) {
+    if (index !== background.length - 1) {
       setIndex(index + 1);
     }
   };
@@ -41,44 +28,25 @@ const ItemScreen = ({navigation, route}) => {
   const onClickBackBtn = () => {
     if (index !== 0) {
       setIndex(index - 1);
-    } else {
-      navigation.goBack();
     }
   };
 
   return (
-    <ImageBackground style={appStyle.homeView} source={images.bg1}>
-      <View style={{position: 'absolute', top: '0%', left: '2%'}}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={images.home} style={appStyle.back} />
-        </TouchableOpacity>
-      </View>
-      <ImageBackground source={dataBg[index].bg} style={appStyle.backg}>
-        <Text style={[appStyle.labelText, {position: 'absolute', top: '25%'}]}>
-          {male}
-        </Text>
-        <Text style={[appStyle.labelText, {position: 'absolute', top: '35%'}]}>
-          {'&'}
-        </Text>
-        <Text style={[appStyle.labelText, {position: 'absolute', top: '45%'}]}>
-          {female}
-        </Text>
-        <Text style={[appStyle.labelText1, {position: 'absolute', top: '60%'}]}>
-          {date}
-        </Text>
-        <Text style={[appStyle.labelText1, {position: 'absolute', top: '75%'}]}>
-          {address}
-        </Text>
+    <ScrollView>
+      <ImageBackground source={background[index]} style={appStyle.scrollStyle}>
+        <View style={appStyle.bottomView}>
+          <TouchableOpacity onPress={() => onClickBackBtn()}>
+            <Image source={images.back} style={appStyle.btn} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={images.home} style={appStyle.btn} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => onClickNextBtn()}>
+            <Image source={images.next} style={appStyle.btn} />
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickBackBtn()}>
-          <Image source={images.back} style={appStyle.btn} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => onClickNextBtn()}>
-          <Image source={images.next} style={appStyle.btn} />
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+    </ScrollView>
   );
 };
 
@@ -88,24 +56,19 @@ export const appStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     resizeMode: 'cover',
   },
-  backg: {
+  scrollStyle: {
     width: windowWidth,
-    height: windowHeight * 0.7,
+    height: windowHeight * 1.2,
     resizeMode: 'contain',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  labelText: {
-    fontSize: 50,
-    fontFamily: 'Belligo',
-    color: '#d3a869',
-  },
-  labelText1: {
-    fontSize: 30,
-    fontFamily: 'Belligo',
-    color: '#d3a869',
+  startBtn: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
   },
   btn: {
     width: windowWidth * 0.3,
@@ -114,15 +77,10 @@ export const appStyle = StyleSheet.create({
   },
   bottomView: {
     width: windowWidth,
-    height: windowHeight * 0.1,
+    height: windowHeight * 0.2,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-  },
-  back: {
-    width: windowWidth * 0.1,
-    height: windowHeight * 0.1,
-    resizeMode: 'contain',
   },
 });
 

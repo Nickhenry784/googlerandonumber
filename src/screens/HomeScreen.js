@@ -9,7 +9,6 @@ import {
   Image,
   FlatList,
   Alert,
-  TextInput,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -19,39 +18,31 @@ import {images} from '../assets';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
+const dataButton = [
+  {id: 1, image: images.teaceremony, background: images.teamau},
+  {id: 2, image: images.sakura, background: images.sakuramau},
+  {id: 3, image: images.phusimoutain, background: images.mautea},
+  {id: 4, image: images.kimono, background: images.kimonobackground},
+  ,
+];
 
-const HomeScreen = () => {
+const Home = () => {
   const navigation = useNavigation();
 
   const points = useSelector(state => state.points);
 
-  const [male, setMale] = useState('');
-  const [female, setFemale] = useState('');
-  const [address, setAddress] = useState('');
-  const [date, setDate] = useState('');
+  const [popup, setPopup] = useState(false);
 
-  const dispatch = useDispatch();
+  const onClickStartButton = item => {
+    if (points.value === 0) {
+      Alert.alert('Please buy more turn');
+      return false;
+    }
+    navigation.navigate('List');
+  };
 
   const onClickTurnButton = () => {
     navigation.navigate('BUY');
-  };
-
-  const onClickStartButton = () => {
-    if (points.value <= 0) {
-      Alert.alert('Please buy more turn!');
-      return false;
-    }
-    if (male === '' || female === '' || address === '' || date === '') {
-      Alert.alert('Please input your information!');
-      return false;
-    }
-    dispatch(decrement());
-    navigation.navigate('Item', {
-      male: male,
-      female: female,
-      address: address,
-      date: date,
-    });
   };
 
   return (
@@ -59,37 +50,28 @@ const HomeScreen = () => {
       <View style={appStyle.appBar}>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.turn} style={appStyle.buyImage} />
+            <Image source={images.view} style={appStyle.scoreStyle} />
             <Text style={appStyle.turnText}>{points.value}</Text>
           </View>
         </TouchableOpacity>
-      </View>
-      <View style={{position: 'absolute', top: '5%'}}>
-        <Image source={images.textstart} style={appStyle.brokenImage} />
-      </View>
-      <View style={{position: 'absolute', top: '15%'}}>
-        <Text style={appStyle.labelText}>Male</Text>
-        <TextInput style={appStyle.input} onChangeText={setMale} value={male} />
-        <Text style={appStyle.labelText}>Female</Text>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={setFemale}
-          value={female}
-        />
-        <Text style={appStyle.labelText}>Address</Text>
-        <TextInput
-          style={appStyle.input}
-          onChangeText={setAddress}
-          value={address}
-        />
-        <Text style={appStyle.labelText}>Date</Text>
-        <TextInput style={appStyle.input} onChangeText={setDate} value={date} />
-      </View>
-      <View style={appStyle.bottomView}>
-        <TouchableOpacity onPress={() => onClickStartButton()}>
-          <Image source={images.Start} style={appStyle.itemView} />
+        <TouchableOpacity onPress={() => setPopup(true)}>
+          <Image source={images.note} style={appStyle.buyImage} />
         </TouchableOpacity>
       </View>
+      <View style={appStyle.bottomView}>
+        <TouchableOpacity onPress={onClickStartButton}>
+          <Image source={images.watchnow} style={appStyle.startBtn} />
+        </TouchableOpacity>
+      </View>
+      {popup && (
+        <View style={appStyle.popupView}>
+          <ImageBackground style={appStyle.popupImage} source={images.bangnote}>
+            <TouchableOpacity onPress={() => setPopup(false)}>
+              <Image source={images.OKnote} style={appStyle.okBtn} />
+            </TouchableOpacity>
+          </ImageBackground>
+        </View>
+      )}
     </ImageBackground>
   );
 };
@@ -103,68 +85,86 @@ export const appStyle = StyleSheet.create({
     justifyContent: 'space-between',
     resizeMode: 'cover',
   },
-  input: {
-    height: 50,
-    width: windowWidth * 0.6,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    backgroundColor: 'white',
-    fontSize: 20,
-  },
   appBar: {
-    height: windowHeight * 0.1,
-    paddingHorizontal: 20,
+    flex: 0.1,
     width: '100%',
+    paddingHorizontal: 10,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-  },
-  turnView: {
-    flexDirection: 'row',
-    width: windowWidth * 0.15,
-    height: '100%',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
-  turnText: {
-    fontSize: 30,
-    fontFamily: 'Belligo',
-    color: 'black',
+  popupImage: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.4,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  popupView: {
+    width: windowWidth,
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(1, 1, 1, 0.7)',
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
   },
   buyImage: {
     width: windowWidth * 0.1,
     height: windowWidth * 0.1,
     resizeMode: 'contain',
   },
-  brokenImage: {
-    width: windowWidth * 0.6,
+  okBtn: {
+    width: windowWidth * 0.2,
     height: windowWidth * 0.2,
     resizeMode: 'contain',
-  },
-  itemView: {
-    width: windowWidth * 0.4,
-    height: windowWidth * 0.2,
-    resizeMode: 'contain',
-  },
-  labelText: {
-    fontSize: 30,
-    fontFamily: 'Belligo',
-    color: 'black',
   },
   bottomView: {
-    height: windowHeight * 0.2,
+    flex: 0.5,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  phoneImage: {
-    width: windowWidth * 0.5,
-    height: windowHeight * 0.7,
+  centerView: {
+    flex: 0.4,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  turnView: {
+    width: windowWidth * 0.15,
+    marginRight: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  bullImage: {
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.4,
     resizeMode: 'contain',
-    position: 'absolute',
-    top: '0%',
+  },
+  startBtn: {
+    width: windowWidth * 0.3,
+    height: windowHeight * 0.1,
+    resizeMode: 'contain',
+  },
+  scoreStyle: {
+    width: windowWidth * 0.1,
+    height: windowWidth * 0.1,
+    resizeMode: 'contain',
+  },
+  turnText: {
+    fontSize: 30,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  labelText: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
 
-export default HomeScreen;
+export default Home;

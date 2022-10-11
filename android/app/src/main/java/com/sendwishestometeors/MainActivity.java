@@ -1,4 +1,4 @@
-package com.hazeltromp.wedcardond;
+package com.maybellrippin.cookvietnamesevs;
 
 import com.facebook.react.ReactActivity;
 
